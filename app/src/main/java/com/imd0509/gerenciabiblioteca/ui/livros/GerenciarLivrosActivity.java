@@ -48,8 +48,6 @@ public class GerenciarLivrosActivity extends AppCompatActivity {
         rvListaLivros.setHasFixedSize(true);
         rvListaLivros.setAdapter(adapter);
 
-
-
     }
 
     private void findViewsIds() {
