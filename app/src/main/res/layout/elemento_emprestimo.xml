@@ -1,6 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-             android:layout_width="match_parent"
-             android:layout_height="match_parent">
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="4dp"
+    android:id="@+id/cvEmprestimo">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <TextView
+        android:id="@+id/tvNome"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Emprestimos"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/tvUsuario"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="usuario"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"/>
+
+    <TextView
+        android:id="@+id/tvLivro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="livro"
+        android:layout_marginTop="60dp"
+        android:textSize="20dp"/>
+
+
+
+    <TextView
+        android:id="@+id/tvData"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="data"
+        android:textAlignment="center"
+        android:layout_marginTop="100dp"
+        android:textSize="20dp"/>
+
+</androidx.cardview.widget.CardView>

@@ -1,25 +1,29 @@
 package com.imd0509.gerenciabiblioteca.model;
 
-public class Emprestimo {
+import java.io.Serializable;
 
-    private Usuario usuario;
-    private Livro livro;
+public class Emprestimo implements Serializable {
+
+    private Long id;
+    private String nome;
     private String dataEmprestimo;
+    private String usuario;
+    private String livro;
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Long getId() {
+        return id;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setId(Long id) {
+        this.id = id;
     }
 
-    public Livro getLivro() {
-        return livro;
+    public String getNome() {
+        return nome;
     }
 
-    public void setLivro(Livro livro) {
-        this.livro = livro;
+    public void setNome(String nome) {
+        this.nome = nome;
     }
 
     public String getDataEmprestimo() {
@@ -28,5 +32,21 @@ public class Emprestimo {
 
     public void setDataEmprestimo(String dataEmprestimo) {
         this.dataEmprestimo = dataEmprestimo;
+    }
+
+    public String getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(String usuario) {
+        this.usuario = usuario;
+    }
+
+    public String getLivro() {
+        return livro;
+    }
+
+    public void setLivro(String livro) {
+        this.livro = livro;
     }
 }
