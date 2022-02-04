@@ -5,19 +5,21 @@ import java.util.List;
 public class Livro {
     private int id;
     private String titulo;
-    private String subTitulo;
     private String descricao;
-    private List<String> atores;
+    private String atores;
     private String dataPublicação;
-    private String lingua;
+    private String publicadora;
     private String urlImagemCapa;
 
 
     public Livro(){}
 
-    public Livro(String titulo, String descricao) {
+    public Livro(String titulo, String descricao, String atores, String dataPublicação, String publicadora) {
         this.titulo = titulo;
         this.descricao = descricao;
+        this.atores = atores;
+        this.dataPublicação = dataPublicação;
+        this.publicadora = publicadora;
     }
 
     public int getId() {
@@ -36,12 +38,12 @@ public class Livro {
         this.titulo = titulo;
     }
 
-    public String getSubTitulo() {
-        return subTitulo;
+    public String getPublicadora() {
+        return publicadora;
     }
 
-    public void setSubTitulo(String subTitulo) {
-        this.subTitulo = subTitulo;
+    public void setPublicadora(String publicadora) {
+        this.publicadora = publicadora;
     }
 
     public String getDescricao() {
@@ -52,11 +54,11 @@ public class Livro {
         this.descricao = descricao;
     }
 
-    public List<String> getAtores() {
+    public String getAtores() {
         return atores;
     }
 
-    public void setAtores(List<String> atores) {
+    public void setAtores(String atores) {
         this.atores = atores;
     }
 
@@ -66,14 +68,6 @@ public class Livro {
 
     public void setDataPublicação(String dataPublicação) {
         this.dataPublicação = dataPublicação;
-    }
-
-    public String getLingua() {
-        return lingua;
-    }
-
-    public void setLingua(String lingua) {
-        this.lingua = lingua;
     }
 
     public String getUrlImagemCapa() {

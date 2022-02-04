@@ -14,6 +14,7 @@ import com.imd0509.gerenciabiblioteca.adapters.LivrosAdapter;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class GerenciarLivrosActivity extends AppCompatActivity {
@@ -34,11 +35,13 @@ public class GerenciarLivrosActivity extends AppCompatActivity {
         findViewsIds();
         setListeners();
 
+
+
         //apenas para testes
-        listaLivros.add(new Livro("Harry Potter", "Um bruxinho da pesada"));
-        listaLivros.add(new Livro("Os Miseraveis", "Um bruxinho da pesada"));
-        listaLivros.add(new Livro("Coraline", "Um bruxinho da pesada"));
-        listaLivros.add(new Livro("O diario de Anne Frank", "Um bruxinho da pesada"));
+        listaLivros.add(new Livro("Harry Potter", "Um bruxinho da pesada","Jk Rolling" , "2015", "Nova Fronteira"));
+        listaLivros.add(new Livro("Os Miseraveis", "Um bruxinho da pesada","Vitor Hulgo" , "1882", "Nova Fronteira"));
+        listaLivros.add(new Livro("Harry Potter: E as reliquias da morte", "Um bruxinho da pesada","Jk Rolling" , "2015", "Nova Fronteira"));
+        listaLivros.add(new Livro("Harry Potter", "Um bruxinho da pesada","Jk Rolling" , "2015", "Nova Fronteira"));
         //
 
         adapter = new LivrosAdapter(listaLivros);

@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
+import org.w3c.dom.Text;
+
 import java.util.List;
 
 public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosViewHolder> {
@@ -30,7 +32,8 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
     public void onBindViewHolder(@NonNull LivrosAdapter.LivrosViewHolder holder, int position) {
         Livro livro = listaLivros.get(position);
         holder.tvTitulo.setText(livro.getTitulo());
-        holder.tvDescricao.setText(livro.getDescricao());
+        holder.tvAutor.setText(livro.getAtores().toString());
+        holder.tvPublicacao.setText(livro.getPublicadora() + " - " + livro.getDataPublicação());
     }
 
     @Override
@@ -40,12 +43,16 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
 
     public class LivrosViewHolder extends RecyclerView.ViewHolder {
         TextView tvTitulo;
-        TextView tvDescricao;
+        TextView tvAutor;
+        TextView tvPublicacao;
+        TextView tvQuantidade;
 
         public LivrosViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.tv_titulo);
-            tvDescricao = itemView.findViewById(R.id.tv_descricao);
+            tvAutor = itemView.findViewById(R.id.tv_autor);
+            tvPublicacao = itemView.findViewById(R.id.tv_publicacao);
+            tvQuantidade = itemView.findViewById(R.id.tv_quantidade);
         }
     }
 }
