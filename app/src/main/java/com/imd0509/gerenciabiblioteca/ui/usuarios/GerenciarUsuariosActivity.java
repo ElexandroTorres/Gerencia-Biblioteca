@@ -1,5 +1,9 @@
 package com.imd0509.gerenciabiblioteca.ui.usuarios;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -7,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -24,9 +29,21 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
     private RecyclerView rvUsuarios;
     private FloatingActionButton fabUsuario;
 
+    ActivityResultLauncher<Intent> resultadoCadastro = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result != null && result.getResultCode() == RESULT_OK) {
+                Usuario novoUsuario = (Usuario) result.getData().getExtras().getSerializable("usuario");
+                usuarios.add(novoUsuario);
+                int index = usuarios.size() - 1;
+                usuariosAdapter.notifyItemInserted(index);
+            }
+        }
+    });
+
     public void onClickFab(View view) {
         Intent intent = new Intent(GerenciarUsuariosActivity.this, AdicionarUsuarioActivity.class);
-//        intent
+        resultadoCadastro.launch(intent);
     }
 
     @Override
