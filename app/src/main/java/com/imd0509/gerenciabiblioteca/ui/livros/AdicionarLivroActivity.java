@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
+import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
 import com.imd0509.gerenciabiblioteca.service.IBookService;
 
 import retrofit2.Call;
@@ -51,18 +52,18 @@ public class AdicionarLivroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 IBookService bookService = retrofit.create(IBookService.class);
-                Call<String> resultado = bookService.pesquisarLivro();
+                Call<Root> resultado = bookService.pesquisarLivro();
 
-                resultado.enqueue(new Callback<String>() {
+                resultado.enqueue(new Callback<Root>() {
                     @Override
-                    public void onResponse(Call<String> call, Response<String> response) {
+                    public void onResponse(Call<Root> call, Response<Root> response) {
                         if(response.isSuccessful()) {
-                            apiResultados.setText(response.body());
+                            apiResultados.setText(response.body().toString());
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<String> call, Throwable t) {
+                    public void onFailure(Call<Root> call, Throwable t) {
 
                     }
                 });
