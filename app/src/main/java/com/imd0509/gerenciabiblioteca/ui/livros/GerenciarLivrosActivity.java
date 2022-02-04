@@ -17,7 +17,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class GerenciarLivrosActivity extends AppCompatActivity {
+public class GerenciarLivrosActivity extends AppCompatActivity implements LivrosAdapter.LivroListener{
 
     private FloatingActionButton fabAdicionarNovoLivro;
     private RecyclerView rvListaLivros;
@@ -35,8 +35,6 @@ public class GerenciarLivrosActivity extends AppCompatActivity {
         findViewsIds();
         setListeners();
 
-
-
         //apenas para testes
         listaLivros.add(new Livro("Harry Potter", "Um bruxinho da pesada","Jk Rolling" , "2015", "Nova Fronteira"));
         listaLivros.add(new Livro("Os Miseraveis", "Um bruxinho da pesada","Vitor Hulgo" , "1882", "Nova Fronteira"));
@@ -44,7 +42,7 @@ public class GerenciarLivrosActivity extends AppCompatActivity {
         listaLivros.add(new Livro("Harry Potter", "Um bruxinho da pesada","Jk Rolling" , "2015", "Nova Fronteira"));
         //
 
-        adapter = new LivrosAdapter(listaLivros);
+        adapter = new LivrosAdapter(listaLivros, this::onLivroClickListener);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GerenciarLivrosActivity.this);
         rvListaLivros.setLayoutManager(layoutManager);
@@ -69,4 +67,10 @@ public class GerenciarLivrosActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onLivroClickListener(int position) {
+        Intent intentDetalhesLivros = new Intent(GerenciarLivrosActivity.this, DetalhesLivroActivity.class);
+        intentDetalhesLivros.putExtra("livroSelecionado", listaLivros.get(position));
+        startActivity(intentDetalhesLivros);
+    }
 }

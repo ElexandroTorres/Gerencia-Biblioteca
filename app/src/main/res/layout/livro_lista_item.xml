@@ -15,18 +15,16 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/teal_200"
         android:padding="8dp">
 
         <TextView
             android:id="@+id/tv_titulo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="Harry Potter: E as  reliquias da morte"
+            tools:text="Harry Potter: E as reliquias da morte"
             android:textSize="26sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
 
             />
@@ -47,9 +45,20 @@
             android:layout_height="wrap_content"
             tools:text="Nova fronteira, 2015"
             android:textStyle="italic|bold"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_autor"
+            />
+
+        <ImageView
+            android:id="@+id/iv_livro_icone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_menu_book_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_quantidade"
+            app:layout_constraintTop_toTopOf="@id/tv_quantidade"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quantidade"
+            android:layout_marginRight="2dp"
             />
 
         <TextView
@@ -59,7 +68,27 @@
             tools:text="4"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toTopOf="@id/tv_emprestados" />
+
+        <TextView
+            android:id="@+id/tv_emprestados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="2"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_emprestados_icone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_north_east_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_emprestados"
+            app:layout_constraintTop_toTopOf="@id/tv_emprestados"
+            app:layout_constraintBottom_toBottomOf="@id/tv_emprestados"
+            android:layout_marginRight="2dp"
+            />
 
 
 

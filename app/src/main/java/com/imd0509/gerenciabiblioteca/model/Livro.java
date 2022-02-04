@@ -1,8 +1,11 @@
 package com.imd0509.gerenciabiblioteca.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.List;
 
-public class Livro {
+public class Livro implements Parcelable {
     private int id;
     private String titulo;
     private String descricao;
@@ -76,5 +79,15 @@ public class Livro {
 
     public void setUrlImagemCapa(String urlImagemCapa) {
         this.urlImagemCapa = urlImagemCapa;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+
     }
 }
