@@ -1,5 +1,6 @@
 package com.imd0509.gerenciabiblioteca.ui.usuarios;
 
+
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -10,17 +11,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.util.Log;
 import android.view.View;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.UsuariosAdapter;
+import com.imd0509.gerenciabiblioteca.dao.UsuariosDAO;
 import com.imd0509.gerenciabiblioteca.model.Usuario;
-import com.imd0509.gerenciabiblioteca.ui.MainActivity;
 
-import java.util.ArrayList;
+import java.text.ParseException;
 import java.util.List;
 
 public class GerenciarUsuariosActivity extends AppCompatActivity implements UsuariosAdapter.ItemUsuarioListener {
@@ -46,14 +46,21 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
         resultadoCadastro.launch(intent);
     }
 
+    private void loadData() {
+        try {
+            UsuariosDAO usuariosDAO = new UsuariosDAO(GerenciarUsuariosActivity.this);
+            usuarios = usuariosDAO.listar();
+        } catch (ParseException e) {
+            Log.i("Error", e.getMessage());
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerenciar_usuarios);
 
-        Usuario test = new Usuario("Vinicius", new ArrayList<>());
-        usuarios = new ArrayList<>();
-        usuarios.add(test);
+        loadData();
 
         usuariosAdapter = new UsuariosAdapter(usuarios, this);
 

@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.imd0509.gerenciabiblioteca.R;
+import com.imd0509.gerenciabiblioteca.dao.UsuariosDAO;
 import com.imd0509.gerenciabiblioteca.model.Usuario;
 
 import java.util.ArrayList;
@@ -21,10 +22,13 @@ public class AdicionarUsuarioActivity extends AppCompatActivity {
         String nome = etNome.getText().toString();
         Usuario usuario = new Usuario(nome, new ArrayList<>());
 
-        Intent intent = new Intent();
-        intent.putExtra("usuario", usuario);
-        setResult(RESULT_OK, intent);
-        finish();
+        UsuariosDAO usuariosDAO = new UsuariosDAO(AdicionarUsuarioActivity.this);
+        if (usuariosDAO.salvar(usuario)) {
+            Intent intent = new Intent();
+            intent.putExtra("usuario", usuario);
+            setResult(RESULT_OK, intent);
+            finish();
+        }
     }
 
     @Override
