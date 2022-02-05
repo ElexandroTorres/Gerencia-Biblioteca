@@ -17,6 +17,14 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String USUARIOS_ID = "id";
     public static String USUARIOS_NOME = "nome";
 
+    public static String EMPRESTIMOS_NOME_TABELA = "emprestimos";
+    public static String EMPRESTIMOS_ID = "id";
+    public static String NOME_EMPRESTIMO = "nome";
+    public static String DATA_EMPRESTIMO = "data";
+    public static String USUARIO_EMPRESTIMO = "usuario";
+    public static String LIVRO_EMPRESTIMO = "livro";
+
+
     public DBHelper(@Nullable Context context) {
         super(context, NOME_DB, null, VERSION);
     }
@@ -32,9 +40,17 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 USUARIOS_NOME + " VARCHAR(50) NOT NULL);";
 
+        String sqlCreateEmprestimo = "CREATE TABLE IF NOT EXISTS " + EMPRESTIMOS_NOME_TABELA +
+                "(" + EMPRESTIMOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                NOME_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
+                DATA_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
+                USUARIO_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
+                LIVRO_EMPRESTIMO + " VARCHAR(50) NOT NULL);";
+
         try {
             database.execSQL(sqlCreateLivros);
             database.execSQL(sqlCreateUsuarios);
+            database.execSQL(sqlCreateEmprestimo);
         } catch (Exception e) {
             //TODO fazer algo aqui depois.
         }
@@ -44,6 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         database.execSQL("DROP TABLE IF EXISTS " + LIVROS_NOME_TABELA);
         database.execSQL("DROP TABLE IF EXISTS " + USUARIOS_NOME_TABELA);
+        database.execSQL("DROP TABLE IF EXISTS " + EMPRESTIMOS_NOME_TABELA);
         onCreate(database);
     }
 }
