@@ -9,10 +9,12 @@ import androidx.annotation.Nullable;
 public class DBHelper extends SQLiteOpenHelper {
     public static int VERSION = 1;
     public static String NOME_DB = "db_biblioteca";
+
     public static String LIVROS_NOME_TABELA = "livros";
     public static String LIVROS_ID = "id";
     public static String LIVROS_TITULO = "titulo";
     public static String LIVROS_DESCRICAO = "descricao";
+
     public static String USUARIOS_NOME_TABELA = "usuarios";
     public static String USUARIOS_ID = "id";
     public static String USUARIOS_NOME = "nome";
