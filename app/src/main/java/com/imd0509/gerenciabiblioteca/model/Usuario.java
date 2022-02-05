@@ -45,4 +45,22 @@ public class Usuario implements Serializable {
     public void setEmprestimos(List<Emprestimo> emprestimos) {
         this.emprestimos = emprestimos;
     }
+
+    public void update(Usuario usuario) {
+        nome = usuario.getNome();
+        emprestimos = usuario.getEmprestimos();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        Usuario that = (Usuario) o;
+        return id.equals(that.getId());
+    }
 }

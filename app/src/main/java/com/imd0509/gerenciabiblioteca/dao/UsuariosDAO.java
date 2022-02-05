@@ -56,7 +56,7 @@ public class UsuariosDAO {
         return usuarios;
     }
 
-    public boolean update(Usuario usuario) {
+    public boolean atualizar(Usuario usuario) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("nome", usuario.getNome());
 

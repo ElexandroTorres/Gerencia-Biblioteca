@@ -41,6 +41,20 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
         }
     });
 
+    ActivityResultLauncher<Intent> resultadoAtualizacao = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
+        @Override
+        public void onActivityResult(ActivityResult result) {
+            if (result != null && result.getResultCode() == RESULT_OK) {
+                Usuario novoUsuario = (Usuario) result.getData().getExtras().getSerializable("usuario");
+                int index = usuarios.indexOf(novoUsuario);
+                usuarios.get(index).update(novoUsuario);
+
+                usuariosAdapter.notifyItemChanged(index);
+            }
+        }
+    });
+
+
     public void onClickFab(View view) {
         Intent intent = new Intent(GerenciarUsuariosActivity.this, AdicionarUsuarioActivity.class);
         resultadoCadastro.launch(intent);
@@ -76,8 +90,8 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
 
     @Override
     public void onItemClick(int position) {
-        Intent informacoesIntent = new Intent(GerenciarUsuariosActivity.this, DetalhesUsuarioActivity.class);
-        informacoesIntent.putExtra("usuario", usuarios.get(position));
-        startActivity(informacoesIntent);
+        Intent intent = new Intent(GerenciarUsuariosActivity.this, DetalhesUsuarioActivity.class);
+        intent.putExtra("usuario", usuarios.get(position));
+        resultadoAtualizacao.launch(intent);
     }
 }
