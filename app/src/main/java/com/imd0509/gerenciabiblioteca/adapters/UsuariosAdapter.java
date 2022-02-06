@@ -22,11 +22,14 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
         this.itemUsuarioListener = itemUsuarioListener;
     }
 
+
     @NonNull
     @Override
     public LCHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_usuario, parent, false);
-        return new LCHolder(item, itemUsuarioListener);
+        LCHolder lcHolder = new LCHolder(item, itemUsuarioListener);
+        item.setOnLongClickListener(lcHolder);
+        return lcHolder;
     }
 
     @Override
@@ -42,7 +45,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
         return usuarios.size();
     }
 
-    public class LCHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
+    public class LCHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
         private ItemUsuarioListener itemUsuarioListener;
         public TextView tvNome;
         public TextView tvEmprestimosTotal;
@@ -64,9 +67,16 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
         public void onClick(View view) {
             itemUsuarioListener.onItemClick(getAdapterPosition());
         }
+
+        @Override
+        public boolean onLongClick(View view) {
+            itemUsuarioListener.onLongClick(getAdapterPosition());
+            return true;
+        }
     }
 
     public interface ItemUsuarioListener {
         void onItemClick(int position);
+        void onLongClick(int position);
     }
 }

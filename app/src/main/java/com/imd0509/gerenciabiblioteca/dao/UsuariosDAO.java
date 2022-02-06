@@ -69,4 +69,14 @@ public class UsuariosDAO {
         }
         return true;
     }
+
+    public boolean deletar(Integer id) {
+        try {
+            String[] args = {id.toString()};
+            escrever.delete(DBHelper.USUARIOS_NOME_TABELA, "id=?", args);
+        } catch (Exception e) {
+            Log.i("INFO", "Erro apagar registro!" + e.getMessage());
+            return false;
+        }
+        return true;    }
 }

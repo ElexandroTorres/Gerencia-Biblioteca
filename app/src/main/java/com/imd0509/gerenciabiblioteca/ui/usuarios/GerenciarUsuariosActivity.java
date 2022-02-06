@@ -9,10 +9,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imd0509.gerenciabiblioteca.R;
@@ -83,6 +86,7 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
         rvUsuarios.setLayoutManager(layoutManager);
         rvUsuarios.setHasFixedSize(true);
         rvUsuarios.setAdapter(usuariosAdapter);
+        rvUsuarios.setLongClickable(true);
 
         fabUsuario = findViewById(R.id.fabUsuario);
         fabUsuario.setOnClickListener(this::onClickFab);
@@ -93,5 +97,34 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
         Intent intent = new Intent(GerenciarUsuariosActivity.this, DetalhesUsuarioActivity.class);
         intent.putExtra("usuario", usuarios.get(position));
         resultadoAtualizacao.launch(intent);
+    }
+
+    @Override
+    public void onLongClick(int position) {
+        Usuario usuario = usuarios.get(position);
+
+        AlertDialog.Builder dialog = new AlertDialog.Builder(GerenciarUsuariosActivity.this);
+
+        dialog.setTitle("Confirmar Exclusão");
+
+        dialog.setMessage("Deseja excluir o usuário: " + usuario.getNome() + " ?");
+
+        dialog.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                UsuariosDAO usuariosDAO = new UsuariosDAO(GerenciarUsuariosActivity.this);
+                if (usuariosDAO.deletar(usuario.getId())) {
+                    usuarios.remove(position);
+                    usuariosAdapter.notifyItemRemoved(position);
+                    Toast.makeText(GerenciarUsuariosActivity.this, "O usuário foi removido", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(GerenciarUsuariosActivity.this, "Erro ao deletar usuário", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+        dialog.setNegativeButton("Não", null);
+
+        dialog.create();
+        dialog.show();
     }
 }
