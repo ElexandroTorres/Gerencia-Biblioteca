@@ -12,14 +12,20 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.GerenciaBiblioteca">
         <activity
+            android:name=".ui.usuarios.GerenciarUsuariosActivity"
+            android:exported="false"
+            android:label="Gerenciar usuários"
+            android:parentActivityName=".ui.MainActivity" />
+        <activity
             android:name=".ui.usuarios.AdicionarUsuarioActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Adicionar usuário"
+            android:parentActivityName=".ui.usuarios.GerenciarUsuariosActivity" />
         <activity
             android:name=".ui.usuarios.DetalhesUsuarioActivity"
-            android:exported="false" />
-        <activity
-            android:name=".ui.usuarios.GerenciarUsuariosActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:label="Dados do usuário"
+            android:parentActivityName=".ui.usuarios.GerenciarUsuariosActivity" />
         <activity
             android:name=".ui.emprestimos.DetalhesEmprestimoActivity"
             android:exported="false" />
