@@ -6,15 +6,18 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-import com.imd0509.gerenciabiblioteca.model.Usuario;
-
 public class DBHelper extends SQLiteOpenHelper {
     public static int VERSION = 1;
     public static String NOME_DB = "db_biblioteca";
+
     public static String LIVROS_NOME_TABELA = "livros";
     public static String LIVROS_ID = "id";
     public static String LIVROS_TITULO = "titulo";
     public static String LIVROS_DESCRICAO = "descricao";
+
+    public static String USUARIOS_NOME_TABELA = "usuarios";
+    public static String USUARIOS_ID = "id";
+    public static String USUARIOS_NOME = "nome";
 
     public static String EMPRESTIMOS_NOME_TABELA = "emprestimos";
     public static String EMPRESTIMOS_ID = "id";
@@ -30,16 +33,14 @@ public class DBHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase database) {
-        String sqlCreate = "CREATE TABLE IF NOT EXISTS " + LIVROS_NOME_TABELA +
+        String sqlCreateLivros = "CREATE TABLE IF NOT EXISTS " + LIVROS_NOME_TABELA +
                 "(" + LIVROS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 LIVROS_TITULO + " VARCHAR(50) NOT NULL, " +
                 LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL);";
 
-        try {
-            database.execSQL(sqlCreate);
-        } catch (Exception e) {
-            //TODO fazer algo aqui depois.
-        }
+        String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
+                "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
+                USUARIOS_NOME + " VARCHAR(50) NOT NULL);";
 
         String sqlCreateEmprestimo = "CREATE TABLE IF NOT EXISTS " + EMPRESTIMOS_NOME_TABELA +
                 "(" + EMPRESTIMOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -49,17 +50,18 @@ public class DBHelper extends SQLiteOpenHelper {
                 LIVRO_EMPRESTIMO + " VARCHAR(50) NOT NULL);";
 
         try {
+            database.execSQL(sqlCreateLivros);
+            database.execSQL(sqlCreateUsuarios);
             database.execSQL(sqlCreateEmprestimo);
-        }catch (Exception e){
-            //TO DO
+        } catch (Exception e) {
+            //TODO fazer algo aqui depois.
         }
-
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase database, int oldVersion, int newVersion) {
         database.execSQL("DROP TABLE IF EXISTS " + LIVROS_NOME_TABELA);
+        database.execSQL("DROP TABLE IF EXISTS " + USUARIOS_NOME_TABELA);
         database.execSQL("DROP TABLE IF EXISTS " + EMPRESTIMOS_NOME_TABELA);
         onCreate(database);
     }
