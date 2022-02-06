@@ -25,6 +25,28 @@ public class Livro implements Parcelable {
         this.publicadora = publicadora;
     }
 
+    protected Livro(Parcel in) {
+        id = in.readInt();
+        titulo = in.readString();
+        descricao = in.readString();
+        atores = in.readString();
+        dataPublicação = in.readString();
+        publicadora = in.readString();
+        urlImagemCapa = in.readString();
+    }
+
+    public static final Creator<Livro> CREATOR = new Creator<Livro>() {
+        @Override
+        public Livro createFromParcel(Parcel in) {
+            return new Livro(in);
+        }
+
+        @Override
+        public Livro[] newArray(int size) {
+            return new Livro[size];
+        }
+    };
+
     public int getId() {
         return id;
     }
@@ -88,6 +110,12 @@ public class Livro implements Parcelable {
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
-
+        dest.writeInt(id);
+        dest.writeString(titulo);
+        dest.writeString(descricao);
+        dest.writeString(atores);
+        dest.writeString(dataPublicação);
+        dest.writeString(publicadora);
+        dest.writeString(urlImagemCapa);
     }
 }
