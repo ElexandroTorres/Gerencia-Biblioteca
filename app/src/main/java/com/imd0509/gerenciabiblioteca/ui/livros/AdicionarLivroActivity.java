@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
+import com.imd0509.gerenciabiblioteca.service.Api;
 import com.imd0509.gerenciabiblioteca.service.IBookService;
 
 import retrofit2.Call;
@@ -33,7 +35,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_livro);
 
-        retrofit = new Retrofit.Builder().baseUrl("https://www.googleapis.com/books/v1/")
+        retrofit = new Retrofit.Builder().baseUrl(Api.BASE_URL)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build();
 
@@ -52,7 +54,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 IBookService bookService = retrofit.create(IBookService.class);
-                Call<Root> resultado = bookService.pesquisarLivro();
+                Call<Root> resultado = bookService.pesquisarLivro(edtPesquisarGoogleBooks.getText().toString());
 
                 resultado.enqueue(new Callback<Root>() {
                     @Override
@@ -64,7 +66,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
 
                     @Override
                     public void onFailure(Call<Root> call, Throwable t) {
-
+                        Log.d("meuerro", t.toString());
                     }
                 });
             }
