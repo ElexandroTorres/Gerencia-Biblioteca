@@ -113,7 +113,7 @@ public class GerenciarUsuariosActivity extends AppCompatActivity implements Usua
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 UsuariosDAO usuariosDAO = new UsuariosDAO(GerenciarUsuariosActivity.this);
-                if (usuariosDAO.deletar(usuario.getId())) {
+                if (usuariosDAO.deletar(usuario.getCpf())) {
                     usuarios.remove(position);
                     usuariosAdapter.notifyItemRemoved(position);
                     Toast.makeText(GerenciarUsuariosActivity.this, "O usuário foi removido", Toast.LENGTH_SHORT).show();
