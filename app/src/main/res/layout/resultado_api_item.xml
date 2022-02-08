@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:backgroundTint="@color/teal_200"
+    android:layout_marginHorizontal="8dp"
+    android:layout_marginTop="8dp"
+    android:elevation="16dp"
+    app:strokeColor="@color/black"
+    app:strokeWidth="2dp"
+    app:cardCornerRadius="8dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="8dp">
+
+        <TextView
+            android:id="@+id/tv_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Harry Potter: E as reliquias da morte"
+            android:textSize="26sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+
+            />
+
+        <TextView
+            android:id="@+id/tv_autor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="J.K Rolling"
+            android:textSize="16sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
+            />
+
+        <TextView
+            android:id="@+id/tv_publicacao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Nova fronteira, 2015"
+            android:textStyle="italic|bold"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_autor"
+            />
+
+        <ImageView
+            android:id="@+id/iv_livro_icone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_menu_book_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_quantidade"
+            app:layout_constraintTop_toTopOf="@id/tv_quantidade"
+            app:layout_constraintBottom_toBottomOf="@id/tv_quantidade"
+            android:layout_marginRight="2dp"
+            />
+
+        <TextView
+            android:id="@+id/tv_quantidade"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/tv_emprestados" />
+
+        <TextView
+            android:id="@+id/tv_emprestados"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+
+        <ImageView
+            android:id="@+id/iv_emprestados_icone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/ic_baseline_north_east_24"
+            app:layout_constraintEnd_toStartOf="@id/tv_emprestados"
+            app:layout_constraintTop_toTopOf="@id/tv_emprestados"
+            app:layout_constraintBottom_toBottomOf="@id/tv_emprestados"
+            android:layout_marginRight="2dp"
+            />
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>

@@ -23,6 +23,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
         this.listaLivros = listaLivros;
         this.livroListener = livroListener;
     }
+
     @NonNull
     @Override
     public LivrosAdapter.LivrosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {

@@ -7,7 +7,7 @@
     tools:context=".ui.livros.AdicionarLivroActivity">
 
     <EditText
-        android:id="@+id/edt_pesquisar_google_books"
+        android:id="@+id/adicionar_livro_edt_pesquisar_google_books"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Livro a pesquisar"
@@ -16,13 +16,13 @@
         app:layout_constraintTop_toTopOf="parent"/>
 
     <Button
-        android:id="@+id/btn_pesquisar_google_books"
+        android:id="@+id/adicionar_livro_btn_pesquisar_google_books"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Pesquisar"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/edt_pesquisar_google_books"/>
+        app:layout_constraintTop_toBottomOf="@id/adicionar_livro_edt_pesquisar_google_books"/>
 
     <TextView
         android:id="@+id/api_resultados"
@@ -30,7 +30,7 @@
         android:layout_height="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/btn_pesquisar_google_books"
+        app:layout_constraintTop_toBottomOf="@id/adicionar_livro_btn_pesquisar_google_books"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
