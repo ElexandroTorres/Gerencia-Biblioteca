@@ -74,7 +74,7 @@ public class DetalhesUsuarioActivity extends AppCompatActivity {
         etNumero.setText(usuario.getNumero());
         etComplemento.setText(usuario.getComplemento());
 
-        etCep.setFocusable(false);
+        etCpf.setEnabled(false);
 
         btnAtualizar.setOnClickListener(this::onClickAtualizar);
 

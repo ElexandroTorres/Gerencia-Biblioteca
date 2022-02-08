@@ -110,6 +110,12 @@ public class Usuario implements Serializable {
 
     public void update(Usuario usuario) {
         nome = usuario.getNome();
+        email = usuario.getEmail();
+        cep = usuario.getCep();
+        bairro = usuario.getBairro();
+        rua = usuario.getRua();
+        numero = usuario.getNumero();
+        complemento = usuario.getComplemento();
         emprestimos = usuario.getEmprestimos();
     }
 
