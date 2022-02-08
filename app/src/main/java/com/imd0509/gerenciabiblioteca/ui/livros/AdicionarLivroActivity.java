@@ -1,6 +1,7 @@
 package com.imd0509.gerenciabiblioteca.ui.livros;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
@@ -14,8 +15,8 @@ import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.LivrosAdapter;
 import com.imd0509.gerenciabiblioteca.adapters.ResultadosApiAdapter;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
-import com.imd0509.gerenciabiblioteca.service.GoogleBooksApi;
-import com.imd0509.gerenciabiblioteca.service.IBookService;
+import com.imd0509.gerenciabiblioteca.network.GoogleBooksApi;
+import com.imd0509.gerenciabiblioteca.network.IBookService;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -40,12 +41,14 @@ public class AdicionarLivroActivity extends AppCompatActivity {
 
         findViewsIds();
         setListeners();
+
+
     }
 
     private void findViewsIds() {
         edtPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_edt_pesquisar_google_books);
         btnPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_btn_pesquisar_google_books);
-        apiResultados = findViewById(R.id.api_resultados);
+        rvResultadosApi = findViewById(R.id.adicionar_livro_rv_resultados_api);
     }
 
     private void setListeners() {
@@ -70,5 +73,14 @@ public class AdicionarLivroActivity extends AppCompatActivity {
                 });
             }
         });
+    }
+
+    private void configurarListaResultados() {
+        adapter = new ResultadosApiAdapter(/*LISTA DE RESULTADOS*/);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdicionarLivroActivity.this);
+        rvResultadosApi.setLayoutManager(layoutManager);
+        rvResultadosApi.setHasFixedSize(true);
+        rvResultadosApi.setAdapter(adapter);
     }
 }

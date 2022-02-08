@@ -24,13 +24,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/adicionar_livro_edt_pesquisar_google_books"/>
 
-    <TextView
-        android:id="@+id/api_resultados"
-        android:layout_width="0dp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/adicionar_livro_rv_resultados_api"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/adicionar_livro_btn_pesquisar_google_books"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:listitem="@layout/resultado_api_item"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/adicionar_livro_btn_pesquisar_google_books"
-        app:layout_constraintBottom_toBottomOf="parent"/>
+        app:layout_constraintStart_toStartOf="parent"/>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.imd0509.gerenciabiblioteca.service;
+package com.imd0509.gerenciabiblioteca.network;
 
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;

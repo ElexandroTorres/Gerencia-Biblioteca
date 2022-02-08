@@ -1,97 +1,81 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    xmlns:tools="http://schemas.android.com/tools"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:backgroundTint="@color/teal_200"
-    android:layout_marginHorizontal="8dp"
-    android:layout_marginTop="8dp"
-    android:elevation="16dp"
-    app:strokeColor="@color/black"
-    app:strokeWidth="2dp"
-    app:cardCornerRadius="8dp">
+    android:layout_width="match_parent"
+    android:layout_height="164dp"
+    android:padding="8dp">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="8dp">
+        android:layout_height="128dp"
+        android:layout_marginLeft="16dp"
+        android:elevation="16dp"
+        app:cardCornerRadius="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:strokeColor="@color/black"
+        app:strokeWidth="2dp">
 
-        <TextView
-            android:id="@+id/tv_titulo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Harry Potter: E as reliquias da morte"
-            android:textSize="26sp"
-            android:textStyle="bold"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="66dp"
+            android:padding="8dp"
+            >
+            <TextView
+                android:id="@+id/resultado_api_item_tv_titulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:maxLength="64"
+                android:textColor="@color/black"
+                android:text="Harry Potter e as Reliquias da morte"
+                android:textSize="16dp"
+                android:textStyle="bold" />
 
-            />
+            <TextView
+                android:id="@+id/resultado_api_item_tv_autores"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resultado_api_item_tv_titulo"
+                android:maxLength="36"
+                android:textColor="@color/black"
+                android:text="J.K Rowling"
+                android:textSize="14dp"
+                />
 
-        <TextView
-            android:id="@+id/tv_autor"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="J.K Rolling"
-            android:textSize="16sp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_titulo"
-            />
+            <TextView
+                android:id="@+id/resultado_api_item_tv_editora"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/resultado_api_item_tv_autores"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:maxLength="36"
+                android:textColor="@color/black"
+                android:text="Editora"
+                android:textSize="14dp"
+                />
 
-        <TextView
-            android:id="@+id/tv_publicacao"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            tools:text="Nova fronteira, 2015"
-            android:textStyle="italic|bold"
-            android:layout_marginTop="8dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tv_autor"
-            />
-
-        <ImageView
-            android:id="@+id/iv_livro_icone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_menu_book_24"
-            app:layout_constraintEnd_toStartOf="@id/tv_quantidade"
-            app:layout_constraintTop_toTopOf="@id/tv_quantidade"
-            app:layout_constraintBottom_toBottomOf="@id/tv_quantidade"
-            android:layout_marginRight="2dp"
-            />
-
-        <TextView
-            android:id="@+id/tv_quantidade"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="4"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toTopOf="@id/tv_emprestados" />
-
-        <TextView
-            android:id="@+id/tv_emprestados"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="2"
-            android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
-
-        <ImageView
-            android:id="@+id/iv_emprestados_icone"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/ic_baseline_north_east_24"
-            app:layout_constraintEnd_toStartOf="@id/tv_emprestados"
-            app:layout_constraintTop_toTopOf="@id/tv_emprestados"
-            app:layout_constraintBottom_toBottomOf="@id/tv_emprestados"
-            android:layout_marginRight="2dp"
-            />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
 
+    </com.google.android.material.card.MaterialCardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+    <ImageView
+        android:layout_width="84dp"
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:layout_marginVertical="8dp"
+        android:background="@drawable/capa_livro_shape"
+        android:elevation="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-</com.google.android.material.card.MaterialCardView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
