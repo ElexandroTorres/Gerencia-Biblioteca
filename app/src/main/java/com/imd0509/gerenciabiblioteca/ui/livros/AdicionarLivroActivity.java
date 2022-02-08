@@ -14,9 +14,13 @@ import android.widget.TextView;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.LivrosAdapter;
 import com.imd0509.gerenciabiblioteca.adapters.ResultadosApiAdapter;
+import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
 import com.imd0509.gerenciabiblioteca.network.GoogleBooksApi;
 import com.imd0509.gerenciabiblioteca.network.IBookService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,9 +34,13 @@ public class AdicionarLivroActivity extends AppCompatActivity {
     TextView apiResultados;
     RecyclerView rvResultadosApi;
 
+    List<Item> listaTeste = new ArrayList<>();
+
     private ResultadosApiAdapter adapter;
 
     private Retrofit retrofit;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +49,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
 
         findViewsIds();
         setListeners();
-
+        configurarListaResultados();
 
     }
 
@@ -61,8 +69,8 @@ public class AdicionarLivroActivity extends AppCompatActivity {
                 resultado.enqueue(new Callback<Root>() {
                     @Override
                     public void onResponse(Call<Root> call, Response<Root> response) {
-                        if(response.isSuccessful()) {
-                            apiResultados.setText(response.body().toString());
+                        if(response.isSuccessful() && response != null) {
+                            adapter.setList(response.body().getItems());
                         }
                     }
 
@@ -76,7 +84,8 @@ public class AdicionarLivroActivity extends AppCompatActivity {
     }
 
     private void configurarListaResultados() {
-        adapter = new ResultadosApiAdapter(/*LISTA DE RESULTADOS*/);
+        adapter = new ResultadosApiAdapter(listaTeste);
+        rvResultadosApi.setAdapter(adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdicionarLivroActivity.this);
         rvResultadosApi.setLayoutManager(layoutManager);

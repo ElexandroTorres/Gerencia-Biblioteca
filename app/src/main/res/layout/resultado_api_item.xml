@@ -68,6 +68,7 @@
     </com.google.android.material.card.MaterialCardView>
 
     <ImageView
+        android:id="@+id/resultado_api_item_iv_capa"
         android:layout_width="84dp"
         android:layout_height="128dp"
         android:layout_alignParentTop="true"

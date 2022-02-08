@@ -4,7 +4,7 @@ import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
 public class GoogleBooksApi {
-    public static String BASE_URL = "";
+    public static String BASE_URL = "https://www.googleapis.com/books/v1/";
     private static Retrofit retrofit;
     public static Retrofit getClient() {
         if(retrofit == null) {
