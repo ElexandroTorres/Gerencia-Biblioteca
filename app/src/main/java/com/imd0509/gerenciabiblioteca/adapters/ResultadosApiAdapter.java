@@ -5,19 +5,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.imd0509.gerenciabiblioteca.R;
-import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
-import com.imd0509.gerenciabiblioteca.model.apiresponse.VolumeInfo;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 
 public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdapter.ResultadosViewHolder> {
@@ -27,8 +19,6 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
     public ResultadosApiAdapter(List<Item> listaResultados) {
         this.listaResultados = listaResultados;
     }
-
-    public ResultadosApiAdapter(){}
 
     public void setList(List<Item> listaResultados) {
         this.listaResultados = listaResultados;
@@ -46,6 +36,25 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
     public void onBindViewHolder(@NonNull ResultadosApiAdapter.ResultadosViewHolder holder, int position) {
         Item item = listaResultados.get(position);
         holder.tvTitulo.setText(item.getVolumeInfo().title);
+
+        if(item.getVolumeInfo().authors != null) {
+            holder.tvAutores.setText(item.getVolumeInfo().getAuthors());
+        }
+
+        if(item.getVolumeInfo().publisher != null) {
+            if(item.getVolumeInfo().publishedDate != null) {
+                holder.tvEditoraAno.setText(item.getVolumeInfo().publisher + ", " + item.getVolumeInfo().publishedDate);
+            }
+            else {
+                holder.tvEditoraAno.setText(item.getVolumeInfo().publisher);
+            }
+        }
+        else {
+            if(item.getVolumeInfo().publishedDate != null) {
+                holder.tvEditoraAno.setText(item.getVolumeInfo().publishedDate);
+            }
+        }
+
 
         if(item.getVolumeInfo().imageLinks != null) {
             Picasso.get()
@@ -65,34 +74,17 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
 
     public class ResultadosViewHolder extends RecyclerView.ViewHolder{
         TextView tvTitulo;
+        TextView tvAutores;
+        TextView tvEditoraAno;
         ImageView tvCapa;
         public ResultadosViewHolder(@NonNull View itemView) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.resultado_api_item_tv_titulo);
             tvCapa = itemView.findViewById(R.id.resultado_api_item_iv_capa);
+            tvAutores = itemView.findViewById(R.id.resultado_api_item_tv_autores);
+            tvEditoraAno = itemView.findViewById(R.id.resultado_api_item_tv_editora);
         }
     }
 }
 
-/*
-* TextView tvTitulo;
-        TextView tvAutor;
-        TextView tvPublicacao;
-        TextView tvQuantidade;
 
-        LivroListener itemListener;
-
-        public LivrosViewHolder(@NonNull View itemView, LivroListener livroListener) {
-            super(itemView);
-            tvTitulo = itemView.findViewById(R.id.tv_titulo);
-            tvAutor = itemView.findViewById(R.id.tv_autor);
-            tvPublicacao = itemView.findViewById(R.id.tv_publicacao);
-            tvQuantidade = itemView.findViewById(R.id.tv_quantidade);
-
-            itemListener = livroListener;
-
-            itemView.setOnClickListener(this);
-        }
-*
-*
-* */

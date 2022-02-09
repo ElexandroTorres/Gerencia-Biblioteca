@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.imd0509.gerenciabiblioteca.R;
@@ -33,6 +34,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
     Button btnPesquisarGoogleBooks;
     TextView apiResultados;
     RecyclerView rvResultadosApi;
+    ProgressBar progressBar;
 
     List<Item> listaTeste = new ArrayList<>();
 
@@ -57,12 +59,14 @@ public class AdicionarLivroActivity extends AppCompatActivity {
         edtPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_edt_pesquisar_google_books);
         btnPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_btn_pesquisar_google_books);
         rvResultadosApi = findViewById(R.id.adicionar_livro_rv_resultados_api);
+        progressBar = findViewById(R.id.adicionar_livro_progressBar);
     }
 
     private void setListeners() {
         btnPesquisarGoogleBooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                progressBar.setVisibility(View.VISIBLE);
                 IBookService bookService = GoogleBooksApi.getClient().create(IBookService.class);
                 Call<Root> resultado = bookService.pesquisarLivro(edtPesquisarGoogleBooks.getText().toString());
 
@@ -71,6 +75,7 @@ public class AdicionarLivroActivity extends AppCompatActivity {
                     public void onResponse(Call<Root> call, Response<Root> response) {
                         if(response.isSuccessful() && response != null) {
                             adapter.setList(response.body().getItems());
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
 

@@ -13,18 +13,13 @@ public class VolumeInfo{
     public String publisher;
     public ImageLinks imageLinks;
 
-    @Override
-    public String toString() {
-        return "VolumeInfo{" +
-                "title='" + title + '\'' +
-                ", authors=" + authors +
-                ", publishedDate='" + publishedDate + '\'' +
-                ", pageCount=" + pageCount +
-                ", language='" + language + '\'' +
-                ", subtitle='" + subtitle + '\'' +
-                ", description='" + description + '\'' +
-                ", publisher='" + publisher + '\'' +
-                ", imageLinks=" + imageLinks +
-                '}';
+
+    public String getAuthors() {
+        String atores = "";
+        for(int i = 0; i < authors.size(); i++) {
+            atores = atores + " " + authors.get(i);
+        }
+        return atores;
     }
+
 }
