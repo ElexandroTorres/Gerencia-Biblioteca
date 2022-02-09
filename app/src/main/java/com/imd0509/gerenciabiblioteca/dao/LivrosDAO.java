@@ -1,13 +1,9 @@
 package com.imd0509.gerenciabiblioteca.dao;
 
-package com.elexandro.minhasanotacoes.dao;
-
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-
 
 import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
 import com.imd0509.gerenciabiblioteca.model.Livro;
@@ -16,11 +12,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-public class LivrosDado {
+public class LivrosDAO {
     private final SQLiteDatabase write;
     private final SQLiteDatabase read;
 
-    public NotesDAO(Context context) {
+    public LivrosDAO(Context context) {
         DBHelper dbHelper = new DBHelper(context);
         write = dbHelper.getWritableDatabase();
         read = dbHelper.getReadableDatabase();
@@ -31,8 +27,6 @@ public class LivrosDado {
         content.put(DBHelper.LIVROS_TITULO, livro.getTitulo());
         content.put(DBHelper.LIVROS_DESCRICAO, livro.getDescricao());
 
-
-
         try {
             write.insert(DBHelper.LIVROS_NOME_TABELA, null, content);
         } catch (Exception e) {
@@ -41,50 +35,47 @@ public class LivrosDado {
         return true;
     }
 
-    public List<Livro> listNotes() {
-        List<Livro> notes = new ArrayList<>();
+    public List<Livro> listLivros() {
+        List<Livro> livros = new ArrayList<>();
         String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
         Cursor cursor = read.rawQuery(sql, null);
 
         cursor.moveToFirst();
         while(cursor.moveToNext()) {
-
             Livro livro = new Livro();
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_ID));
-            String title = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
-            String description = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DESCRICAO));
+            String titulo = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
+            String descricao = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DESCRICAO));
 
-            note.setId(id);
-            note.setTitle(title);
-            note.setDescription(description);
-            note.setDate(date);
+            livro.setTitulo(titulo);
+            livro.setDescricao(descricao);
 
-            notes.add(note);
+            livros.add(livro);
         }
         cursor.close();
-        Collections.sort(notes, Collections.reverseOrder());
-        return notes;
+
+        return livros;
     }
 
-    public boolean update(Note note) {
+    public boolean update(Livro livro) {
         ContentValues content = new ContentValues();
-        content.put("title", note.getTitle());
-        content.put("description", note.getDescription());
-        content.put("date", note.getDate());
+        content.put(DBHelper.LIVROS_ID, livro.getId());
+        content.put(DBHelper.LIVROS_TITULO, livro.getTitulo());
+        content.put(DBHelper.LIVROS_DESCRICAO, livro.getDescricao());
 
         try {
-            String[] args = {Integer.toString(note.getId())};
-            write.update(DBHelper.TABLE_NAME, content, "id=?",args);
+            String[] args = {Integer.toString(livro.getId())};
+            write.update(DBHelper.LIVROS_NOME_TABELA, content, "id=?",args);
         } catch (Exception e) {
             return false;
         }
         return true;
     }
 
-    public boolean delete(Note note) {
+    public boolean delete(Livro livro) {
         try {
-            String[] args = {Integer.toString(note.getId())};
-            write.delete(DBHelper.TABLE_NAME, "id=?", args);
+            String[] args = {Integer.toString(livro.getId())};
+            write.delete(DBHelper.LIVROS_NOME_TABELA, "id=?", args);
         } catch (Exception e) {
             return false;
         }
@@ -92,7 +83,7 @@ public class LivrosDado {
     }
 
     public boolean deleteAll() {
-        String sqlDelete = "DELETE FROM " + DBHelper.TABLE_NAME + ";";
+        String sqlDelete = "DELETE FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
 
         try {
             write.execSQL(sqlDelete);

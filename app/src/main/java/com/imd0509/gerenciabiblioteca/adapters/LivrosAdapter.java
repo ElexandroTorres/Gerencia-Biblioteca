@@ -11,8 +11,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
-import org.w3c.dom.Text;
-
 import java.util.List;
 
 public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosViewHolder> {

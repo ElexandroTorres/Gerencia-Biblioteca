@@ -7,17 +7,20 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.bumptech.glide.Glide;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
-import com.squareup.picasso.Picasso;
 import java.util.List;
 
 public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdapter.ResultadosViewHolder> {
 
     private List<Item> listaResultados;
+    private ResultadoListener resultadoListener;
 
-    public ResultadosApiAdapter(List<Item> listaResultados) {
+    public ResultadosApiAdapter(List<Item> listaResultados, ResultadoListener resultadoListener) {
         this.listaResultados = listaResultados;
+        this.resultadoListener = resultadoListener;
     }
 
     public void setList(List<Item> listaResultados) {
@@ -29,7 +32,7 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
     @Override
     public ResultadosApiAdapter.ResultadosViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View resultadoItem = LayoutInflater.from(parent.getContext()).inflate(R.layout.resultado_api_item, parent, false);
-        return new ResultadosApiAdapter.ResultadosViewHolder(resultadoItem);
+        return new ResultadosApiAdapter.ResultadosViewHolder(resultadoItem, resultadoListener);
     }
 
     @Override
@@ -57,14 +60,12 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
 
 
         if(item.getVolumeInfo().imageLinks != null) {
-            Picasso.get()
+            Glide.with(holder.itemView.getContext())
                     .load(item.getVolumeInfo().imageLinks.thumbnail)
                     .placeholder(R.drawable.capa_livro_shape)
                     .error(R.drawable.capa_livro_shape)
                     .into(holder.tvCapa);
         }
-
-
     }
 
     @Override
@@ -72,18 +73,33 @@ public class ResultadosApiAdapter extends RecyclerView.Adapter<ResultadosApiAdap
         return listaResultados.size();
     }
 
-    public class ResultadosViewHolder extends RecyclerView.ViewHolder{
+    public class ResultadosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView tvTitulo;
         TextView tvAutores;
         TextView tvEditoraAno;
         ImageView tvCapa;
-        public ResultadosViewHolder(@NonNull View itemView) {
+
+        ResultadoListener itemListener;
+
+        public ResultadosViewHolder(@NonNull View itemView, ResultadoListener resultadoListener) {
             super(itemView);
             tvTitulo = itemView.findViewById(R.id.resultado_api_item_tv_titulo);
             tvCapa = itemView.findViewById(R.id.resultado_api_item_iv_capa);
             tvAutores = itemView.findViewById(R.id.resultado_api_item_tv_autores);
             tvEditoraAno = itemView.findViewById(R.id.resultado_api_item_tv_editora);
+
+            itemListener = resultadoListener;
+            itemView.setOnClickListener(this);
         }
+
+        @Override
+        public void onClick(View v) {
+            itemListener.onResultadoClickListener(getAdapterPosition());
+        }
+    }
+
+    public interface ResultadoListener {
+        void onResultadoClickListener(int position);
     }
 }
 
