@@ -9,7 +9,6 @@ import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class LivrosDAO {
@@ -26,6 +25,9 @@ public class LivrosDAO {
         ContentValues content = new ContentValues();
         content.put(DBHelper.LIVROS_TITULO, livro.getTitulo());
         content.put(DBHelper.LIVROS_DESCRICAO, livro.getDescricao());
+        content.put(DBHelper.LIVROS_AUTORES, livro.getAutores());
+        content.put(DBHelper.LIVROS_PUBLICADORA_ANO, livro.getPublicadoraAno());
+        content.put(DBHelper.LIVROS_URL_IMAGEM, livro.getUrlImagemCapa());
 
         try {
             write.insert(DBHelper.LIVROS_NOME_TABELA, null, content);
@@ -46,9 +48,16 @@ public class LivrosDAO {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_ID));
             String titulo = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
             String descricao = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DESCRICAO));
+            String autores = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_AUTORES));
+            String publicadoraAno = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_PUBLICADORA_ANO));
+            String urlImagem = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_URL_IMAGEM));
 
+            livro.setId(id);
             livro.setTitulo(titulo);
             livro.setDescricao(descricao);
+            livro.setAutores(autores);
+            livro.setPublicadoraAno(publicadoraAno);
+            livro.setUrlImagemCapa(urlImagem);
 
             livros.add(livro);
         }
@@ -59,9 +68,11 @@ public class LivrosDAO {
 
     public boolean update(Livro livro) {
         ContentValues content = new ContentValues();
-        content.put(DBHelper.LIVROS_ID, livro.getId());
         content.put(DBHelper.LIVROS_TITULO, livro.getTitulo());
         content.put(DBHelper.LIVROS_DESCRICAO, livro.getDescricao());
+        content.put(DBHelper.LIVROS_AUTORES, livro.getAutores());
+        content.put(DBHelper.LIVROS_PUBLICADORA_ANO, livro.getPublicadoraAno());
+        content.put(DBHelper.LIVROS_URL_IMAGEM, livro.getUrlImagemCapa());
 
         try {
             String[] args = {Integer.toString(livro.getId())};

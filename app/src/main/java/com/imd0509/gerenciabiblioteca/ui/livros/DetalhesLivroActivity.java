@@ -70,8 +70,8 @@ public class DetalhesLivroActivity extends AppCompatActivity {
 
     private void setValuesOnViews() {
         tituloLivro.setText(livro.getTitulo());
-        autorLivro.setText(livro.getAtores());
-        editoraAno.setText(livro.getPublicadora());
+        autorLivro.setText(livro.getAutores());
+        editoraAno.setText("...");
         descricaoLivro.setText(livro.getDescricao());
         identificadorLivro.setText("123456789");
         quantidadeLivros.setText("42");

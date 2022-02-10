@@ -33,8 +33,8 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
     public void onBindViewHolder(@NonNull LivrosAdapter.LivrosViewHolder holder, int position) {
         Livro livro = listaLivros.get(position);
         holder.tvTitulo.setText(livro.getTitulo());
-        holder.tvAutor.setText(livro.getAtores().toString());
-        holder.tvPublicacao.setText(livro.getPublicadora() + " - " + livro.getDataPublicação());
+        holder.tvAutor.setText(livro.getAutores());
+        holder.tvPublicacao.setText("...");
     }
 
     @Override

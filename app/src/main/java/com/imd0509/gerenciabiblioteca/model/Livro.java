@@ -9,43 +9,11 @@ public class Livro implements Parcelable {
     private int id;
     private String titulo;
     private String descricao;
-    private String atores;
-    private String dataPublicação;
-    private String publicadora;
+    private String autores;
     private String urlImagemCapa;
-
+    private String publicadoraAno;
 
     public Livro(){}
-
-    public Livro(String titulo, String descricao, String atores, String dataPublicação, String publicadora) {
-        this.titulo = titulo;
-        this.descricao = descricao;
-        this.atores = atores;
-        this.dataPublicação = dataPublicação;
-        this.publicadora = publicadora;
-    }
-
-    protected Livro(Parcel in) {
-        id = in.readInt();
-        titulo = in.readString();
-        descricao = in.readString();
-        atores = in.readString();
-        dataPublicação = in.readString();
-        publicadora = in.readString();
-        urlImagemCapa = in.readString();
-    }
-
-    public static final Creator<Livro> CREATOR = new Creator<Livro>() {
-        @Override
-        public Livro createFromParcel(Parcel in) {
-            return new Livro(in);
-        }
-
-        @Override
-        public Livro[] newArray(int size) {
-            return new Livro[size];
-        }
-    };
 
     public int getId() {
         return id;
@@ -63,12 +31,8 @@ public class Livro implements Parcelable {
         this.titulo = titulo;
     }
 
-    public String getPublicadora() {
-        return publicadora;
-    }
-
-    public void setPublicadora(String publicadora) {
-        this.publicadora = publicadora;
+    public String getPublicadoraAno() {
+        return publicadoraAno;
     }
 
     public String getDescricao() {
@@ -79,20 +43,30 @@ public class Livro implements Parcelable {
         this.descricao = descricao;
     }
 
-    public String getAtores() {
-        return atores;
+    public String getAutores() {
+        return autores;
     }
 
-    public void setAtores(String atores) {
-        this.atores = atores;
+    public void setAutores(List<String> autores) {
+        String autoresString = "";
+        for(int i = 0; i < autores.size(); i++) {
+            autoresString = autoresString + ", " + autores.get(i);
+        }
+
+        this.autores = autoresString;
     }
 
-    public String getDataPublicação() {
-        return dataPublicação;
+    public void setAutores(String autores) {
+        this.autores = autores;
     }
 
-    public void setDataPublicação(String dataPublicação) {
-        this.dataPublicação = dataPublicação;
+    //Quando ja vem do banco.
+    public void setPublicadoraAno(String publicadoraAno) {
+        this.publicadoraAno = publicadoraAno;
+    }
+
+    public void setPublicadoraAno(String publicadora, String ano) {
+        //fazer algo depois
     }
 
     public String getUrlImagemCapa() {
@@ -108,14 +82,34 @@ public class Livro implements Parcelable {
         return 0;
     }
 
+    protected Livro(Parcel in) {
+        id = in.readInt();
+        titulo = in.readString();
+        descricao = in.readString();
+        autores = in.readString();
+        publicadoraAno = in.readString();
+        urlImagemCapa = in.readString();
+    }
+
+    public static final Creator<Livro> CREATOR = new Creator<Livro>() {
+        @Override
+        public Livro createFromParcel(Parcel in) {
+            return new Livro(in);
+        }
+
+        @Override
+        public Livro[] newArray(int size) {
+            return new Livro[size];
+        }
+    };
+
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(titulo);
         dest.writeString(descricao);
-        dest.writeString(atores);
-        dest.writeString(dataPublicação);
-        dest.writeString(publicadora);
+        dest.writeString(autores);
+        dest.writeString(publicadoraAno);
         dest.writeString(urlImagemCapa);
     }
 }

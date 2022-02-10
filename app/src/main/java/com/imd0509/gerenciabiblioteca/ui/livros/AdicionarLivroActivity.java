@@ -14,8 +14,11 @@ import android.widget.Toast;
 
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.ResultadosApiAdapter;
+import com.imd0509.gerenciabiblioteca.dao.LivrosDAO;
+import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
+import com.imd0509.gerenciabiblioteca.model.apiresponse.VolumeInfo;
 import com.imd0509.gerenciabiblioteca.network.GoogleBooksApi;
 import com.imd0509.gerenciabiblioteca.network.IBookService;
 
@@ -33,9 +36,11 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
     private RecyclerView rvResultadosApi;
     private ProgressBar progressBar;
 
-    private List<Item> listaTeste = new ArrayList<>();
+    private List<Item> resultados = new ArrayList<>();
 
     private ResultadosApiAdapter adapter;
+
+    private LivrosDAO livrosDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +72,8 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
                     @Override
                     public void onResponse(Call<Root> call, Response<Root> response) {
                         if(response.isSuccessful() && response != null) {
-                            adapter.setList(response.body().getItems());
+                            resultados = response.body().getItems();
+                            adapter.setList(resultados);
                             progressBar.setVisibility(View.GONE);
                         }
                     }
@@ -82,7 +88,7 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
     }
 
     private void configurarListaResultados() {
-        adapter = new ResultadosApiAdapter(listaTeste, AdicionarLivroActivity.this);
+        adapter = new ResultadosApiAdapter(resultados, AdicionarLivroActivity.this);
         rvResultadosApi.setAdapter(adapter);
 
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdicionarLivroActivity.this);
@@ -93,6 +99,15 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
 
     @Override
     public void onResultadoClickListener(int position) {
-        Toast.makeText(this, "Testando click", Toast.LENGTH_SHORT).show();
+        VolumeInfo livroSelecionado = resultados.get(position).getVolumeInfo();
+        Livro livroAdicionar = new Livro();
+        livroAdicionar.setTitulo(livroSelecionado.title);
+        livroAdicionar.setDescricao(livroSelecionado.description);
+        livroAdicionar.setAutores(livroSelecionado.authors);
+        livroAdicionar.setPublicadoraAno(livroSelecionado.publisher, livroSelecionado.publishedDate);
+        livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
+
+        livrosDAO.save(livroAdicionar);
+        Toast.makeText(this, "Adicionando novo livro...", Toast.LENGTH_SHORT).show();
     }
 }

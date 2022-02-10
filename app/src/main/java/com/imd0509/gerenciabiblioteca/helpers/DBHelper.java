@@ -14,6 +14,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String LIVROS_ID = "id";
     public static String LIVROS_TITULO = "titulo";
     public static String LIVROS_DESCRICAO = "descricao";
+    public static String LIVROS_AUTORES = "autores";
+    public static String LIVROS_PUBLICADORA_ANO = "publicadoraAno";
+    public static String LIVROS_URL_IMAGEM = "urlImage";
 
     public static String USUARIOS_NOME_TABELA = "usuarios";
     public static String USUARIOS_ID = "id";
@@ -36,7 +39,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlCreateLivros = "CREATE TABLE IF NOT EXISTS " + LIVROS_NOME_TABELA +
                 "(" + LIVROS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 LIVROS_TITULO + " VARCHAR(50) NOT NULL, " +
-                LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL);";
+                LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL, " +
+                LIVROS_AUTORES + " VARCHAR(20) NOT NULL, " +
+                LIVROS_PUBLICADORA_ANO + " VARCHAR(30) NOT NULL, " +
+                LIVROS_URL_IMAGEM + " VARCHAR(100) NOT NULL);";
 
         String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
                 "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
