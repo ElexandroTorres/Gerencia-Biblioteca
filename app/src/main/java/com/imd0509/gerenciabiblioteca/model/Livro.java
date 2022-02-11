@@ -9,29 +9,128 @@ public class Livro implements Parcelable {
     private int id;
     private String titulo;
     private String descricao;
-    private String atores;
-    private String dataPublicação;
-    private String publicadora;
+    private String autores;
     private String urlImagemCapa;
-
+    private String publicadoraAno;
+    private boolean estaDisponivel = true;
 
     public Livro(){}
 
-    public Livro(String titulo, String descricao, String atores, String dataPublicação, String publicadora) {
+    public Livro(int id, String titulo, String descricao, String autores, String urlImagemCapa, String publicadoraAno) {
+        this.id = id;
         this.titulo = titulo;
         this.descricao = descricao;
-        this.atores = atores;
-        this.dataPublicação = dataPublicação;
-        this.publicadora = publicadora;
+        this.autores = autores;
+        this.urlImagemCapa = urlImagemCapa;
+        this.publicadoraAno = publicadoraAno;
+    }
+
+    /* ID */
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    /* TITULO */
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo != null ? titulo : "";
+    }
+    /* PUBLICADORA ANO */
+    public String getPublicadoraAno() {
+        return publicadoraAno;
+    }
+
+    public void setPublicadoraAno(String publicadoraAno) {
+        this.publicadoraAno = publicadoraAno;
+    }
+
+    public void setPublicadoraAno(String publicadora, String ano) {
+        if(publicadora != null) {
+            if(ano != null) {
+                this.publicadoraAno = publicadora + ", " + ano;
+            }
+            else {
+                this.publicadoraAno = publicadora;
+            }
+        }
+        else {
+            this.publicadoraAno = "Sem informações da publicação!";
+        }
+    }
+    /* DESCRIÇÃO */
+    public String getDescricao() {
+        return descricao;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao != null ? descricao : "";
+    }
+    /* AUTORES */
+    public String getAutores() {
+        return autores;
+    }
+
+    public void setAutores(List<String> autores) {
+        if(autores != null) {
+            StringBuilder autoresString = new StringBuilder();
+            for(int i = 0; i < autores.size(); i++) {
+                autoresString.append(", ").append(autores.get(i));
+            }
+
+            this.autores = autoresString.toString();
+        }
+        else {
+            this.autores = "";
+        }
+
+    }
+
+    public void setAutores(String autores) {
+        this.autores = autores;
+    }
+    /* IMAGEM CAPA */
+    public String getUrlImagemCapa() {
+        return urlImagemCapa;
+    }
+
+    public void setUrlImagemCapa(String urlImagemCapa) {
+        if(urlImagemCapa != null) {
+            this.urlImagemCapa = urlImagemCapa;
+        }
+        else {
+            this.urlImagemCapa = "";
+        }
+    }
+
+    public void emprestarLivro() {
+        this.estaDisponivel = false;
+    }
+
+    public void devolverLivro() {
+        this.estaDisponivel = true;
+    }
+
+    public boolean getDisponibilidade() {
+        return this.estaDisponivel;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
     }
 
     protected Livro(Parcel in) {
         id = in.readInt();
         titulo = in.readString();
         descricao = in.readString();
-        atores = in.readString();
-        dataPublicação = in.readString();
-        publicadora = in.readString();
+        autores = in.readString();
+        publicadoraAno = in.readString();
         urlImagemCapa = in.readString();
     }
 
@@ -47,75 +146,13 @@ public class Livro implements Parcelable {
         }
     };
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getTitulo() {
-        return titulo;
-    }
-
-    public void setTitulo(String titulo) {
-        this.titulo = titulo;
-    }
-
-    public String getPublicadora() {
-        return publicadora;
-    }
-
-    public void setPublicadora(String publicadora) {
-        this.publicadora = publicadora;
-    }
-
-    public String getDescricao() {
-        return descricao;
-    }
-
-    public void setDescricao(String descricao) {
-        this.descricao = descricao;
-    }
-
-    public String getAtores() {
-        return atores;
-    }
-
-    public void setAtores(String atores) {
-        this.atores = atores;
-    }
-
-    public String getDataPublicação() {
-        return dataPublicação;
-    }
-
-    public void setDataPublicação(String dataPublicação) {
-        this.dataPublicação = dataPublicação;
-    }
-
-    public String getUrlImagemCapa() {
-        return urlImagemCapa;
-    }
-
-    public void setUrlImagemCapa(String urlImagemCapa) {
-        this.urlImagemCapa = urlImagemCapa;
-    }
-
-    @Override
-    public int describeContents() {
-        return 0;
-    }
-
     @Override
     public void writeToParcel(Parcel dest, int flags) {
         dest.writeInt(id);
         dest.writeString(titulo);
         dest.writeString(descricao);
-        dest.writeString(atores);
-        dest.writeString(dataPublicação);
-        dest.writeString(publicadora);
+        dest.writeString(autores);
+        dest.writeString(publicadoraAno);
         dest.writeString(urlImagemCapa);
     }
 }

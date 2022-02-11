@@ -3,6 +3,7 @@ package com.imd0509.gerenciabiblioteca.helpers;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -14,6 +15,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String LIVROS_ID = "id";
     public static String LIVROS_TITULO = "titulo";
     public static String LIVROS_DESCRICAO = "descricao";
+    public static String LIVROS_AUTORES = "autores";
+    public static String LIVROS_PUBLICADORA_ANO = "publicadoraAno";
+    public static String LIVROS_URL_IMAGEM = "urlImage";
 
     public static String USUARIOS_NOME_TABELA = "usuarios";
     public static String USUARIOS_ID = "id";
@@ -36,7 +40,10 @@ public class DBHelper extends SQLiteOpenHelper {
         String sqlCreateLivros = "CREATE TABLE IF NOT EXISTS " + LIVROS_NOME_TABELA +
                 "(" + LIVROS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 LIVROS_TITULO + " VARCHAR(50) NOT NULL, " +
-                LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL);";
+                LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL, " +
+                LIVROS_AUTORES + " VARCHAR(20) NOT NULL, " +
+                LIVROS_PUBLICADORA_ANO + " VARCHAR(30) NOT NULL, " +
+                LIVROS_URL_IMAGEM + " TEXT NOT NULL);";
 
         String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
                 "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -54,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
             database.execSQL(sqlCreateUsuarios);
             database.execSQL(sqlCreateEmprestimo);
         } catch (Exception e) {
-            //TODO fazer algo aqui depois.
+            Log.d("tabela", "deu ruim ao criar tabela");
         }
     }
 

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.Button;
 
 import com.imd0509.gerenciabiblioteca.R;
+import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
 import com.imd0509.gerenciabiblioteca.ui.emprestimos.GerenciarEmprestimosActivity;
 import com.imd0509.gerenciabiblioteca.ui.livros.GerenciarLivrosActivity;
 import com.imd0509.gerenciabiblioteca.ui.usuarios.GerenciarUsuariosActivity;

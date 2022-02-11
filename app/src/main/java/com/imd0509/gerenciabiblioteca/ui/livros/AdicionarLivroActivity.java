@@ -1,73 +1,131 @@
 package com.imd0509.gerenciabiblioteca.ui.livros;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.imd0509.gerenciabiblioteca.R;
+import com.imd0509.gerenciabiblioteca.adapters.ResultadosApiAdapter;
+import com.imd0509.gerenciabiblioteca.dao.LivrosDAO;
 import com.imd0509.gerenciabiblioteca.model.Livro;
+import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
-import com.imd0509.gerenciabiblioteca.service.IBookService;
+import com.imd0509.gerenciabiblioteca.model.apiresponse.VolumeInfo;
+import com.imd0509.gerenciabiblioteca.model.data.LivrosData;
+import com.imd0509.gerenciabiblioteca.network.GoogleBooksApi;
+import com.imd0509.gerenciabiblioteca.network.IBookService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
-public class AdicionarLivroActivity extends AppCompatActivity {
+public class AdicionarLivroActivity extends AppCompatActivity implements ResultadosApiAdapter.ResultadoListener{
 
-    EditText edtPesquisarGoogleBooks;
-    Button btnPesquisarGoogleBooks;
-    TextView apiResultados;
+    private EditText edtPesquisarGoogleBooks;
+    private Button btnPesquisarGoogleBooks;
+    private RecyclerView rvResultadosApi;
+    private ProgressBar progressBar;
 
-    private Retrofit retrofit;
+    private List<Item> resultados = new ArrayList<>();
+    LivrosDAO livrosDAO;
+
+    private ResultadosApiAdapter adapter;
+
+    private LivrosData livrosData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_livro);
 
-        retrofit = new Retrofit.Builder().baseUrl("https://www.googleapis.com/books/v1/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
         findViewsIds();
         setListeners();
+        configurarListaResultados();
+
+        livrosDAO = new LivrosDAO(getApplicationContext());
+
+        livrosData = LivrosData.getLivrosData();
+
+
+
+
     }
 
     private void findViewsIds() {
-        edtPesquisarGoogleBooks = findViewById(R.id.edt_pesquisar_google_books);
-        btnPesquisarGoogleBooks = findViewById(R.id.btn_pesquisar_google_books);
-        apiResultados = findViewById(R.id.api_resultados);
+        edtPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_edt_pesquisar_google_books);
+        btnPesquisarGoogleBooks = findViewById(R.id.adicionar_livro_btn_pesquisar_google_books);
+        rvResultadosApi = findViewById(R.id.adicionar_livro_rv_resultados_api);
+        progressBar = findViewById(R.id.adicionar_livro_progressBar);
     }
 
     private void setListeners() {
         btnPesquisarGoogleBooks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                IBookService bookService = retrofit.create(IBookService.class);
-                Call<Root> resultado = bookService.pesquisarLivro();
+                progressBar.setVisibility(View.VISIBLE);
+                IBookService bookService = GoogleBooksApi.getClient().create(IBookService.class);
+                Call<Root> resultado = bookService.pesquisarLivro(edtPesquisarGoogleBooks.getText().toString());
 
                 resultado.enqueue(new Callback<Root>() {
                     @Override
                     public void onResponse(Call<Root> call, Response<Root> response) {
-                        if(response.isSuccessful()) {
-                            apiResultados.setText(response.body().toString());
+                        if(response.isSuccessful() && response != null) {
+                            resultados = response.body().getItems();
+                            adapter.setList(resultados);
+                            progressBar.setVisibility(View.GONE);
                         }
                     }
 
                     @Override
                     public void onFailure(Call<Root> call, Throwable t) {
-
+                        Log.d("meuerro", t.toString());
                     }
                 });
             }
         });
+    }
+
+    private void configurarListaResultados() {
+        adapter = new ResultadosApiAdapter(resultados, AdicionarLivroActivity.this);
+        rvResultadosApi.setAdapter(adapter);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(AdicionarLivroActivity.this);
+        rvResultadosApi.setLayoutManager(layoutManager);
+        rvResultadosApi.setHasFixedSize(true);
+        rvResultadosApi.setAdapter(adapter);
+    }
+
+    @Override
+    public void onResultadoClickListener(int position) {
+
+        VolumeInfo livroSelecionado = resultados.get(position).getVolumeInfo();
+
+        Livro livroAdicionar = new Livro();
+
+        livroAdicionar.setTitulo(livroSelecionado.title);
+        livroAdicionar.setDescricao(livroSelecionado.description);
+        livroAdicionar.setAutores(livroSelecionado.authors);
+        livroAdicionar.setPublicadoraAno(livroSelecionado.publisher, livroSelecionado.publishedDate);
+        if(livroSelecionado.imageLinks != null) {
+            livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
+            Log.d("salvou", "salvou com imagem");
+        }
+        else {
+            livroAdicionar.setUrlImagemCapa("");
+            Log.d("salvou", "salvou SEMm imagem");
+        }
+
+        livrosData.adicionarLivro(livroAdicionar, getApplicationContext());
     }
 }

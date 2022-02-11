@@ -17,6 +17,7 @@
             android:layout_height="180dp"
             android:layout_margin="16dp"
             android:background="@color/teal_200"
+            android:scaleType="fitXY"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -43,12 +44,14 @@
 
         <TextView
             android:id="@+id/detalhes_livro_tv_editora_ano"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="Editora - ano"
+            tools:text="Editora - ano"
+            android:layout_marginRight="8dp"
             app:layout_constraintBottom_toBottomOf="@id/detalhes_livro_iv_capa_livro"
             app:layout_constraintStart_toStartOf="@id/detalhes_livro_tv_autor_livro"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_autor_livro" />
+            app:layout_constraintEnd_toEndOf="parent"
+             />
 
         <TextView
             android:id="@+id/detalhes_livro_tv_descricao_livro"
@@ -62,6 +65,19 @@
             app:layout_constraintTop_toBottomOf="@id/detalhes_livro_iv_capa_livro" />
 
         <TextView
+            android:id="@+id/detalhes_livro_tv_identificador_livro_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="16dp"
+            android:text="Identificador"
+            android:textColor="@color/black"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_descricao_livro" />
+
+        <TextView
             android:id="@+id/detalhes_livro_tv_identificador_livro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -71,61 +87,21 @@
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_descricao_livro" />
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro_label" />
 
-        <ImageView
-            android:id="@+id/detalhes_livro_iv_quantidade_emprestados_icone"
+        <TextView
+            android:id="@+id/detalhes_livro_tv_situacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro"
-            app:srcCompat="@drawable/ic_baseline_menu_book_24" />
-
-        <TextView
-            android:id="@+id/detalhes_livro_tv_quantidade_livros_label"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Quantidade de Livros: "
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/detalhes_livro_iv_quantidade_emprestados_icone"
-            app:layout_constraintStart_toEndOf="@+id/detalhes_livro_iv_quantidade_emprestados_icone"
-            app:layout_constraintTop_toTopOf="@+id/detalhes_livro_iv_quantidade_emprestados_icone" />
-
-        <TextView
-            android:id="@+id/detalhes_livro_tv_quantidade_livros"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="3"
-            android:textSize="16sp"
-            app:layout_constraintBottom_toBottomOf="@+id/detalhes_livro_tv_quantidade_livros_label"
-            app:layout_constraintStart_toEndOf="@+id/detalhes_livro_tv_quantidade_livros_label"
-            app:layout_constraintTop_toTopOf="@+id/detalhes_livro_tv_quantidade_livros_label" />
-
-
-        <ImageButton
-            android:id="@+id/detalhes_livro_ibtn_diminuir_livro"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginRight="16dp"
-            android:src="@drawable/ic_baseline_minimize_24"
-            app:layout_constraintBottom_toBottomOf="@+id/detalhes_livro_tv_quantidade_livros_label"
-            app:layout_constraintEnd_toStartOf="@+id/detalhes_livro_ibtn_aumentar_livro"
-            app:layout_constraintTop_toTopOf="@+id/detalhes_livro_tv_quantidade_livros_label" />
-
-        <ImageButton
-            android:id="@+id/detalhes_livro_ibtn_aumentar_livro"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
-            android:layout_marginRight="16dp"
-            android:backgroundTint="#E17575"
-            android:src="@drawable/ic_baseline_add_24"
-
-            app:layout_constraintBottom_toBottomOf="@+id/detalhes_livro_tv_quantidade_livros_label"
+            android:text="Situação livro"
+            android:textSize="24sp"
+            android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="@+id/detalhes_livro_tv_quantidade_livros_label" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
