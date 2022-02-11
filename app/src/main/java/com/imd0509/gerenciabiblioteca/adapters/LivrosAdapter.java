@@ -1,6 +1,7 @@
 package com.imd0509.gerenciabiblioteca.adapters;
 
 import android.graphics.Color;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.squareup.picasso.Picasso;
@@ -54,7 +56,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
         }
 
         if(!livro.getUrlImagemCapa().isEmpty()) {
-            Picasso.get()
+            Glide.with(holder.itemView.getContext())
                     .load(livro.getUrlImagemCapa())
                     .placeholder(R.drawable.capa_livro_shape)
                     .error(R.drawable.capa_livro_shape)

@@ -100,7 +100,12 @@ public class Livro implements Parcelable {
     }
 
     public void setUrlImagemCapa(String urlImagemCapa) {
-        this.urlImagemCapa = urlImagemCapa != null ? urlImagemCapa : "";
+        if(urlImagemCapa != null) {
+            this.urlImagemCapa = urlImagemCapa;
+        }
+        else {
+            this.urlImagemCapa = "";
+        }
     }
 
     public void emprestarLivro() {

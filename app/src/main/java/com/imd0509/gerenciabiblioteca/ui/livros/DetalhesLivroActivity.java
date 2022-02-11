@@ -50,11 +50,17 @@ public class DetalhesLivroActivity extends AppCompatActivity {
 
     private void setValuesOnViews() {
 
-        Glide.with(DetalhesLivroActivity.this)
-                .load(livro.getUrlImagemCapa())
-                .placeholder(R.drawable.capa_livro_shape)
-                .error(R.drawable.capa_livro_shape)
-                .into(capaLivro);
+        Log.d("livro", livro.getUrlImagemCapa());
+
+        if(!livro.getUrlImagemCapa().isEmpty()) {
+            Glide.with(DetalhesLivroActivity.this)
+                    .load(livro.getUrlImagemCapa())
+                    .placeholder(R.drawable.capa_livro_shape)
+                    .error(R.drawable.capa_livro_shape)
+                    .into(capaLivro);
+        }
+
+
 
         tituloLivro.setText(livro.getTitulo());
         autorLivro.setText(livro.getAutores());

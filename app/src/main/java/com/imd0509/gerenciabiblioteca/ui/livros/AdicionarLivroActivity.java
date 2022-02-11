@@ -119,9 +119,11 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
         livroAdicionar.setPublicadoraAno(livroSelecionado.publisher, livroSelecionado.publishedDate);
         if(livroSelecionado.imageLinks != null) {
             livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
+            Log.d("salvou", "salvou com imagem");
         }
         else {
             livroAdicionar.setUrlImagemCapa("");
+            Log.d("salvou", "salvou SEMm imagem");
         }
 
         livrosData.adicionarLivro(livroAdicionar, getApplicationContext());
