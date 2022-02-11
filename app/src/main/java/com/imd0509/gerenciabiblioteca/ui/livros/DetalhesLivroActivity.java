@@ -10,6 +10,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
@@ -21,9 +22,6 @@ public class DetalhesLivroActivity extends AppCompatActivity {
     TextView editoraAno;
     TextView descricaoLivro;
     TextView identificadorLivro;
-    TextView quantidadeLivros;
-    ImageButton diminuirQuantidade;
-    ImageButton aumentarQuantidade;
 
     Livro livro;
 
@@ -34,7 +32,6 @@ public class DetalhesLivroActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes_livro);
 
         findViewsIds();
-        setListeners();
 
         livro = getIntent().getParcelableExtra("livroSelecionado");
 
@@ -48,32 +45,21 @@ public class DetalhesLivroActivity extends AppCompatActivity {
         editoraAno = findViewById(R.id.detalhes_livro_tv_editora_ano);
         descricaoLivro = findViewById(R.id.detalhes_livro_tv_descricao_livro);
         identificadorLivro = findViewById(R.id.detalhes_livro_tv_identificador_livro);
-        quantidadeLivros = findViewById(R.id.detalhes_livro_tv_quantidade_livros);
-        diminuirQuantidade = findViewById(R.id.detalhes_livro_ibtn_diminuir_livro);
-        aumentarQuantidade = findViewById(R.id.detalhes_livro_ibtn_aumentar_livro);
     }
 
-    private void setListeners() {
-        aumentarQuantidade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //Aumentar a quantidade de livros.
-            }
-        });
-        diminuirQuantidade.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                //diminuir a quantidade de livros
-            }
-        });
-    }
 
     private void setValuesOnViews() {
+
+        Glide.with(DetalhesLivroActivity.this)
+                .load(livro.getUrlImagemCapa())
+                .placeholder(R.drawable.capa_livro_shape)
+                .error(R.drawable.capa_livro_shape)
+                .into(capaLivro);
+
         tituloLivro.setText(livro.getTitulo());
         autorLivro.setText(livro.getAutores());
-        editoraAno.setText("...");
+        editoraAno.setText(livro.getPublicadoraAno());
         descricaoLivro.setText(livro.getDescricao());
-        identificadorLivro.setText("123456789");
-        quantidadeLivros.setText("42");
+        identificadorLivro.setText("" + livro.getId());
     }
 }

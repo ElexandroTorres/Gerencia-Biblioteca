@@ -23,7 +23,7 @@ public class LivrosDAO {
         read = dbHelper.getReadableDatabase();
     }
 
-    public boolean save(Livro livro) {
+    public long save(Livro livro) {
         ContentValues content = new ContentValues();
         content.put(DBHelper.LIVROS_TITULO, livro.getTitulo());
         content.put(DBHelper.LIVROS_DESCRICAO, livro.getDescricao());
@@ -31,12 +31,21 @@ public class LivrosDAO {
         content.put(DBHelper.LIVROS_PUBLICADORA_ANO, livro.getPublicadoraAno());
         content.put(DBHelper.LIVROS_URL_IMAGEM, livro.getUrlImagemCapa());
 
+        Log.d("banco", livro.getTitulo());
+        Log.d("banco", livro.getDescricao());
+        Log.d("banco", livro.getAutores());
+        Log.d("banco", livro.getPublicadoraAno());
+        Log.d("banco", livro.getUrlImagemCapa());
+
+        long id;
+
         try {
-            write.insert(DBHelper.LIVROS_NOME_TABELA, null, content);
+            id = write.insert(DBHelper.LIVROS_NOME_TABELA, null, content);
         } catch (Exception e) {
-            return false;
+            e.printStackTrace();
+            return -1;
         }
-        return true;
+        return id;
     }
 
     public List<Livro> listLivros() {
@@ -44,7 +53,7 @@ public class LivrosDAO {
         String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
         Cursor cursor = read.rawQuery(sql, null);
 
-        Log.d("teste", "chegou aki");
+        Log.d("cursor", "" + cursor.getCount());
 
         cursor.moveToFirst();
         while(cursor.moveToNext()) {

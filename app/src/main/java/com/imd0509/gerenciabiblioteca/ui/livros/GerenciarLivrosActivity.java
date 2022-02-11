@@ -1,6 +1,7 @@
 package com.imd0509.gerenciabiblioteca.ui.livros;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -14,6 +15,7 @@ import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.LivrosAdapter;
 import com.imd0509.gerenciabiblioteca.dao.LivrosDAO;
 import com.imd0509.gerenciabiblioteca.model.Livro;
+import com.imd0509.gerenciabiblioteca.model.data.LivrosData;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,27 +29,27 @@ public class GerenciarLivrosActivity extends AppCompatActivity implements Livros
     private LivrosAdapter adapter;
     List<Livro> listaLivros = new ArrayList<>();
 
+    LivrosData livrosData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerenciar_livros);
 
-        livrosDAO = new LivrosDAO(GerenciarLivrosActivity.this);
-        //async enquanto mostra carregando.
-        listaLivros = livrosDAO.listLivros();
-
         findViewsIds();
         setListeners();
 
-        Toast.makeText(this, "tamanho: " + listaLivros.size(), Toast.LENGTH_SHORT).show();
-
+        livrosDAO = new LivrosDAO(getApplicationContext());
+        listaLivros = livrosDAO.listLivros();
         adapter = new LivrosAdapter(listaLivros, this::onLivroClickListener);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GerenciarLivrosActivity.this);
+        livrosData = LivrosData.createLivrosData(adapter, listaLivros);
+
+        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GerenciarLivrosActivity.this);
+        RecyclerView.LayoutManager layoutManager = new GridLayoutManager(GerenciarLivrosActivity.this, 3);
         rvListaLivros.setLayoutManager(layoutManager);
         rvListaLivros.setHasFixedSize(true);
         rvListaLivros.setAdapter(adapter);
-
     }
 
     private void findViewsIds() {

@@ -19,6 +19,7 @@ import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Item;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.Root;
 import com.imd0509.gerenciabiblioteca.model.apiresponse.VolumeInfo;
+import com.imd0509.gerenciabiblioteca.model.data.LivrosData;
 import com.imd0509.gerenciabiblioteca.network.GoogleBooksApi;
 import com.imd0509.gerenciabiblioteca.network.IBookService;
 
@@ -41,16 +42,23 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
 
     private ResultadosApiAdapter adapter;
 
+    private LivrosData livrosData;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_livro);
 
-        livrosDAO = new LivrosDAO(AdicionarLivroActivity.this);
-
         findViewsIds();
         setListeners();
         configurarListaResultados();
+
+        livrosDAO = new LivrosDAO(getApplicationContext());
+
+        livrosData = LivrosData.getLivrosData();
+
+
+
 
     }
 
@@ -116,12 +124,6 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
             livroAdicionar.setUrlImagemCapa("");
         }
 
-        if(livrosDAO.save(livroAdicionar)) {
-            Toast.makeText(this, "Adicionando novo livro...", Toast.LENGTH_SHORT).show();
-        }
-        else {
-            Toast.makeText(this, "DEU RUIM", Toast.LENGTH_SHORT).show();
-        }
-
+        livrosData.adicionarLivro(livroAdicionar, getApplicationContext());
     }
 }

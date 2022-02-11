@@ -3,6 +3,7 @@ package com.imd0509.gerenciabiblioteca.helpers;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import androidx.annotation.Nullable;
 
@@ -42,7 +43,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL, " +
                 LIVROS_AUTORES + " VARCHAR(20) NOT NULL, " +
                 LIVROS_PUBLICADORA_ANO + " VARCHAR(30) NOT NULL, " +
-                LIVROS_URL_IMAGEM + " VARCHAR(100) NOT NULL);";
+                LIVROS_URL_IMAGEM + " TEXT NOT NULL);";
 
         String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
                 "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
@@ -60,7 +61,7 @@ public class DBHelper extends SQLiteOpenHelper {
             database.execSQL(sqlCreateUsuarios);
             database.execSQL(sqlCreateEmprestimo);
         } catch (Exception e) {
-            //TODO fazer algo aqui depois.
+            Log.d("tabela", "deu ruim ao criar tabela");
         }
     }
 

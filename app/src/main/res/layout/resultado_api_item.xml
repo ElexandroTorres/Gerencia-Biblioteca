@@ -3,6 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="164dp"
+    xmlns:tools="http://schemas.android.com/tools"
     android:padding="8dp">
 
     <com.google.android.material.card.MaterialCardView
@@ -31,7 +32,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:maxLength="64"
                 android:textColor="@color/black"
-                android:text="Harry Potter e as Reliquias da morte"
+                tools:text="Harry Potter e as Reliquias da morte"
                 android:textSize="16dp"
                 android:textStyle="bold" />
 
@@ -44,7 +45,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/resultado_api_item_tv_titulo"
                 android:maxLength="36"
                 android:textColor="@color/black"
-                android:text="J.K Rowling"
+                tools:text="J.K Rowling"
                 android:textSize="14dp"
                 />
 
@@ -58,7 +59,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:maxLength="36"
                 android:textColor="@color/black"
-                android:text="Editora"
+                tools:text="Editora"
                 android:textSize="14dp"
                 />
 
