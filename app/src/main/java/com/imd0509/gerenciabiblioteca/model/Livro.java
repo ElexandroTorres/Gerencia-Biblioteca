@@ -66,7 +66,14 @@ public class Livro implements Parcelable {
     }
 
     public void setPublicadoraAno(String publicadora, String ano) {
-        //fazer algo depois
+        if(publicadora != null) {
+            if(ano != null) {
+                this.publicadoraAno = publicadora + ", " + ano;
+            }
+            else {
+                this.publicadoraAno = publicadora;
+            }
+        }
     }
 
     public String getUrlImagemCapa() {
@@ -74,7 +81,12 @@ public class Livro implements Parcelable {
     }
 
     public void setUrlImagemCapa(String urlImagemCapa) {
-        this.urlImagemCapa = urlImagemCapa;
+        if(urlImagemCapa == null) {
+            this.urlImagemCapa = "";
+        }
+        else {
+            this.urlImagemCapa = urlImagemCapa;
+        }
     }
 
     @Override

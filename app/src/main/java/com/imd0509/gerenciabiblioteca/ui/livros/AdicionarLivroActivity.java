@@ -37,15 +37,16 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
     private ProgressBar progressBar;
 
     private List<Item> resultados = new ArrayList<>();
+    LivrosDAO livrosDAO;
 
     private ResultadosApiAdapter adapter;
-
-    private LivrosDAO livrosDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_adicionar_livro);
+
+        livrosDAO = new LivrosDAO(AdicionarLivroActivity.this);
 
         findViewsIds();
         setListeners();
@@ -99,15 +100,28 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
 
     @Override
     public void onResultadoClickListener(int position) {
+
         VolumeInfo livroSelecionado = resultados.get(position).getVolumeInfo();
+
         Livro livroAdicionar = new Livro();
+
         livroAdicionar.setTitulo(livroSelecionado.title);
         livroAdicionar.setDescricao(livroSelecionado.description);
         livroAdicionar.setAutores(livroSelecionado.authors);
         livroAdicionar.setPublicadoraAno(livroSelecionado.publisher, livroSelecionado.publishedDate);
-        livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
+        if(livroSelecionado.imageLinks != null) {
+            livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
+        }
+        else {
+            livroAdicionar.setUrlImagemCapa("");
+        }
 
-        livrosDAO.save(livroAdicionar);
-        Toast.makeText(this, "Adicionando novo livro...", Toast.LENGTH_SHORT).show();
+        if(livrosDAO.save(livroAdicionar)) {
+            Toast.makeText(this, "Adicionando novo livro...", Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(this, "DEU RUIM", Toast.LENGTH_SHORT).show();
+        }
+
     }
 }

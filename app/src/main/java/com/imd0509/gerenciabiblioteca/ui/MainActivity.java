@@ -19,14 +19,10 @@ public class MainActivity extends AppCompatActivity {
     Button btnGerenciarEmprestimos;
     Button btnGerenciarUsuarios;
 
-    DBHelper bibliotecaDataBase;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        bibliotecaDataBase = new DBHelper(getApplicationContext());
 
         findViewsIds();
         setListeners();

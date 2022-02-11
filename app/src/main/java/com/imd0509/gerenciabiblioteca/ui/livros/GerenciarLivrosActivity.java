@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imd0509.gerenciabiblioteca.R;
@@ -24,19 +25,21 @@ public class GerenciarLivrosActivity extends AppCompatActivity implements Livros
     private LivrosDAO livrosDAO;
 
     private LivrosAdapter adapter;
-
-    //Apenas para testes.
-    List<Livro> listaLivros;
+    List<Livro> listaLivros = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gerenciar_livros);
 
-        findViewsIds();
-        setListeners();
+        livrosDAO = new LivrosDAO(GerenciarLivrosActivity.this);
         //async enquanto mostra carregando.
         listaLivros = livrosDAO.listLivros();
+
+        findViewsIds();
+        setListeners();
+
+        Toast.makeText(this, "tamanho: " + listaLivros.size(), Toast.LENGTH_SHORT).show();
 
         adapter = new LivrosAdapter(listaLivros, this::onLivroClickListener);
 
