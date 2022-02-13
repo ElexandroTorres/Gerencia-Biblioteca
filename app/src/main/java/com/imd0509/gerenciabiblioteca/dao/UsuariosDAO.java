@@ -25,7 +25,14 @@ public class UsuariosDAO {
 
     public boolean salvar(Usuario usuario) {
         ContentValues contentValues = new ContentValues();
+        contentValues.put("cpf", usuario.getCpf());
         contentValues.put("nome", usuario.getNome());
+        contentValues.put("email", usuario.getEmail());
+        contentValues.put("cep", usuario.getCep());
+        contentValues.put("bairro", usuario.getBairro());
+        contentValues.put("rua", usuario.getRua());
+        contentValues.put("numero", usuario.getNumero());
+        contentValues.put("complemento", usuario.getComplemento());
 
         try {
             escrever.insert(DBHelper.USUARIOS_NOME_TABELA, null, contentValues);
@@ -45,10 +52,16 @@ public class UsuariosDAO {
 
         if (cursor.moveToFirst()) {
             do {
-                Integer id = cursor.getInt(cursor.getColumnIndexOrThrow("id"));
+                String cpf = cursor.getString(cursor.getColumnIndexOrThrow("cpf"));
                 String nome = cursor.getString(cursor.getColumnIndexOrThrow("nome"));
+                String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+                String cep = cursor.getString(cursor.getColumnIndexOrThrow("cep"));
+                String bairro = cursor.getString(cursor.getColumnIndexOrThrow("bairro"));
+                String rua = cursor.getString(cursor.getColumnIndexOrThrow("rua"));
+                String numero = cursor.getString(cursor.getColumnIndexOrThrow("numero"));
+                String complemento = cursor.getString(cursor.getColumnIndexOrThrow("complemento"));
 
-                Usuario usuario = new Usuario(id, nome, new ArrayList<>());
+                Usuario usuario = new Usuario(cpf, nome, email, cep, bairro, rua, numero, complemento, new ArrayList<>());
                 usuarios.add(usuario);
             } while (cursor.moveToNext());
         }
@@ -59,10 +72,17 @@ public class UsuariosDAO {
     public boolean atualizar(Usuario usuario) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("nome", usuario.getNome());
+        contentValues.put("email", usuario.getEmail());
+        contentValues.put("cep", usuario.getCep());
+        contentValues.put("bairro", usuario.getBairro());
+        contentValues.put("rua", usuario.getRua());
+        contentValues.put("numero", usuario.getNumero());
+        contentValues.put("complemento", usuario.getComplemento());
+
 
         try {
-            String[] args = {usuario.getId().toString()};
-            escrever.update(DBHelper.USUARIOS_NOME_TABELA, contentValues, "id=?", args);
+            String[] args = {usuario.getCpf()};
+            escrever.update(DBHelper.USUARIOS_NOME_TABELA, contentValues, "cpf=?", args);
         } catch (Exception e) {
             Log.i("Error", e.getMessage());
             return false;
@@ -70,13 +90,14 @@ public class UsuariosDAO {
         return true;
     }
 
-    public boolean deletar(Integer id) {
+    public boolean deletar(String cpf) {
         try {
-            String[] args = {id.toString()};
-            escrever.delete(DBHelper.USUARIOS_NOME_TABELA, "id=?", args);
+            String[] args = {cpf};
+            escrever.delete(DBHelper.USUARIOS_NOME_TABELA, "cpf=?", args);
         } catch (Exception e) {
             Log.i("INFO", "Erro apagar registro!" + e.getMessage());
             return false;
         }
-        return true;    }
+        return true;
+    }
 }

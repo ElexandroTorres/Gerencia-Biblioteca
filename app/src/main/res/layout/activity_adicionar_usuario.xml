@@ -7,20 +7,32 @@
     android:padding="10dp"
     tools:context=".ui.usuarios.AdicionarUsuarioActivity">
 
-    <include
-        layout="@layout/dados_usuario"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Button
-        android:id="@+id/btn_salvar_usuario"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Salvar"
+        android:layout_height="match_parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include
+                android:id="@+id/include"
+                layout="@layout/dados_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <Button
+                android:id="@+id/btn_salvar_usuario"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Salvar" />
+        </LinearLayout>
+    </ScrollView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

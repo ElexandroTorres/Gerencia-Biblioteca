@@ -20,8 +20,15 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String LIVROS_URL_IMAGEM = "urlImage";
 
     public static String USUARIOS_NOME_TABELA = "usuarios";
-    public static String USUARIOS_ID = "id";
+    public static String USUARIOS_CPF = "cpf";
     public static String USUARIOS_NOME = "nome";
+    public static String USUARIOS_EMAIL = "email";
+    public static String USUARIOS_CEP = "cep";
+    public static String USUARIOS_BAIRRO = "bairro";
+    public static String USUARIOS_RUA = "rua";
+    public static String USUARIOS_NUMERO = "numero";
+    public static String USUARIOS_COMPLEMENTO = "complemento";
+
 
     public static String EMPRESTIMOS_NOME_TABELA = "emprestimos";
     public static String EMPRESTIMOS_ID = "id";
@@ -46,8 +53,14 @@ public class DBHelper extends SQLiteOpenHelper {
                 LIVROS_URL_IMAGEM + " TEXT NOT NULL);";
 
         String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
-                "(" + USUARIOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
-                USUARIOS_NOME + " VARCHAR(50) NOT NULL);";
+                "(" + USUARIOS_CPF + " VARCHAR(11) PRIMARY KEY NOT NULL, " +
+                USUARIOS_NOME + " VARCHAR(50) NOT NULL," +
+                USUARIOS_EMAIL + " VARCHAR(255) NOT NULL," +
+                USUARIOS_CEP + " VARCHAR(8) NOT NULL," +
+                USUARIOS_BAIRRO + " VARCHAR(255) NOT NULL," +
+                USUARIOS_RUA + " VARCHAR(255) NOT NULL," +
+                USUARIOS_NUMERO + " VARCHAR(10) NOT NULL," +
+                USUARIOS_COMPLEMENTO + " VARCHAR(255));";
 
         String sqlCreateEmprestimo = "CREATE TABLE IF NOT EXISTS " + EMPRESTIMOS_NOME_TABELA +
                 "(" + EMPRESTIMOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
