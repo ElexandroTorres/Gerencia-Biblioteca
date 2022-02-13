@@ -10,7 +10,7 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.imd0509.gerenciabiblioteca.R;
-import com.imd0509.gerenciabiblioteca.dao.EmprestimoDAO;
+import com.imd0509.gerenciabiblioteca.dao.EmprestimosDAO;
 import com.imd0509.gerenciabiblioteca.model.Emprestimo;
 
 import java.text.DateFormat;
@@ -54,7 +54,7 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                EmprestimoDAO emprestimoDAO = new EmprestimoDAO(getApplicationContext());
+                EmprestimosDAO emprestimosDAO = new EmprestimosDAO(getApplicationContext());
 
 
                 if(emprestimoAtual != null){//editar empréstimo
@@ -67,12 +67,15 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
                     String usuario = etEmprestimoUsuario.getText().toString();
                     String livro = getEtEmprestimoLivro.getText().toString();
 
+                    int usuarioId = Integer.parseInt(usuario);
+                    int livroId = Integer.parseInt(livro);
+
                     if(!nome.isEmpty()){
                         emprestimoAtual.setNome(nome);
-                        emprestimoAtual.setUsuario(usuario);
-                        emprestimoAtual.setLivro(livro);
+                        emprestimoAtual.setUsuarioId(usuarioId);
+                        emprestimoAtual.setLivroId(livroId);
                         emprestimoAtual.setDataEmprestimo(dataEmprestimo);
-                        if(emprestimoDAO.atualizar(emprestimoAtual)){
+                        if(emprestimosDAO.atualizar(emprestimoAtual)){
                             Toast.makeText(getApplicationContext(), "Empréstimo atualizado", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {
@@ -90,13 +93,16 @@ public class AdicionarEmprestimoActivity extends AppCompatActivity {
                     String usuario = etEmprestimoUsuario.getText().toString();
                     String livro = getEtEmprestimoLivro.getText().toString();
 
+                    int usuarioId = Integer.parseInt(usuario);
+                    int livroId = Integer.parseInt(livro);
+
                     if(!nome.isEmpty()){
                         Emprestimo emprestimo = new Emprestimo();
                         emprestimo.setNome(nome);
-                        emprestimo.setUsuario(usuario);
-                        emprestimo.setLivro(livro);
+                        emprestimo.setUsuarioId(usuarioId);
+                        emprestimo.setLivroId(livroId);
                         emprestimo.setDataEmprestimo(dataEmprestimo);
-                        if(emprestimoDAO.salvar(emprestimo)){
+                        if(emprestimosDAO.salvar(emprestimo)){
                             Toast.makeText(getApplicationContext(), "Empréstimo cadastrado", Toast.LENGTH_SHORT).show();
                             finish();
                         } else {

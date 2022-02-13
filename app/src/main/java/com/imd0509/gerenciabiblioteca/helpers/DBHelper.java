@@ -35,8 +35,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String EMPRESTIMOS_ID = "id";
     public static String NOME_EMPRESTIMO = "nome";
     public static String DATA_EMPRESTIMO = "data";
-    public static String USUARIO_EMPRESTIMO = "usuario";
-    public static String LIVRO_EMPRESTIMO = "livro";
+    public static String USUARIO_EMPRESTIMO = "usuario_id";
+    public static String LIVRO_EMPRESTIMO = "livro_id";
 
 
     public DBHelper(@Nullable Context context) {
@@ -68,8 +68,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 "(" + EMPRESTIMOS_ID + " INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, " +
                 NOME_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
                 DATA_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
-                USUARIO_EMPRESTIMO + " VARCHAR(50) NOT NULL, " +
-                LIVRO_EMPRESTIMO + " VARCHAR(50) NOT NULL);";
+                USUARIO_EMPRESTIMO + " INTERGER, " +
+                LIVRO_EMPRESTIMO + " INTERGER );";
 
         try {
             database.execSQL(sqlCreateLivros);

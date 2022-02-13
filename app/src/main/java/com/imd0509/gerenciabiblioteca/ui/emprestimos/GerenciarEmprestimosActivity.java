@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.adapters.EmprestimosAdapter;
-import com.imd0509.gerenciabiblioteca.dao.EmprestimoDAO;
+import com.imd0509.gerenciabiblioteca.dao.EmprestimosDAO;
 import com.imd0509.gerenciabiblioteca.model.Emprestimo;
 
 import java.util.ArrayList;
@@ -54,8 +54,8 @@ public class GerenciarEmprestimosActivity extends AppCompatActivity {
 
     public void carregarEmprestimos(){
 
-        EmprestimoDAO emprestimoDAO = new EmprestimoDAO(getApplicationContext());
-        meusEmprestimos = emprestimoDAO.listar();
+        EmprestimosDAO emprestimosDAO = new EmprestimosDAO(getApplicationContext());
+        meusEmprestimos = emprestimosDAO.listar();
 
         //2. Exibir a lista de empréstimos
 
@@ -91,8 +91,8 @@ public class GerenciarEmprestimosActivity extends AppCompatActivity {
                 dialog.setPositiveButton("Excluir", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        EmprestimoDAO emprestimoDAO = new EmprestimoDAO(getApplicationContext());
-                        if (emprestimoDAO.deletar(emprestimoSelecionado)){
+                        EmprestimosDAO emprestimosDAO = new EmprestimosDAO(getApplicationContext());
+                        if (emprestimosDAO.deletar(emprestimoSelecionado)){
                             Toast.makeText(getApplicationContext(), "Emprestimo foi removido", Toast.LENGTH_SHORT).show();
                             carregarEmprestimos();
                         }else {

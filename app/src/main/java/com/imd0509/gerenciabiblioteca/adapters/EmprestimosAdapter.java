@@ -37,8 +37,8 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
 
         Emprestimo emprestimo = meusEmprestimos.get(position);
         holder.tvNome.setText(emprestimo.getNome());
-        holder.tvUsuario.setText(emprestimo.getUsuario());
-        holder.tvLivro.setText(emprestimo.getLivro());
+        holder.tvUsuario.setText(emprestimo.getUserId());
+        holder.tvLivro.setText(emprestimo.getBokkId());
         holder.tvData.setText(emprestimo.getDataEmprestimo());
 
 
