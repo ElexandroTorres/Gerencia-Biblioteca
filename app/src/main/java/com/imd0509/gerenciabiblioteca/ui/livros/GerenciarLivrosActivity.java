@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -43,9 +44,9 @@ public class GerenciarLivrosActivity extends AppCompatActivity implements Livros
         listaLivros = livrosDAO.listLivros();
         adapter = new LivrosAdapter(listaLivros, this::onLivroClickListener);
 
+
         livrosData = LivrosData.createLivrosData(adapter, listaLivros);
 
-        //RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(GerenciarLivrosActivity.this);
         RecyclerView.LayoutManager layoutManager = new GridLayoutManager(GerenciarLivrosActivity.this, 3);
         rvListaLivros.setLayoutManager(layoutManager);
         rvListaLivros.setHasFixedSize(true);

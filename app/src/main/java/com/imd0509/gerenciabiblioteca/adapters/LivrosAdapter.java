@@ -42,9 +42,6 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
     @Override
     public void onBindViewHolder(@NonNull LivrosAdapter.LivrosViewHolder holder, int position) {
         Livro livro = listaLivros.get(position);
-        //holder.tvTitulo.setText(livro.getTitulo());
-        //holder.tvAutor.setText(livro.getAutores());
-        //holder.tvPublicacao.setText("...");
         holder.tvId.setText("" + livro.getId());
         if(livro.getDisponibilidade()) {
             holder.tvDisponibilidade.setText("Disponivel");
@@ -82,10 +79,6 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
 
         public LivrosViewHolder(@NonNull View itemView, LivroListener livroListener) {
             super(itemView);
-            //tvTitulo = itemView.findViewById(R.id.tv_titulo);
-            //tvAutor = itemView.findViewById(R.id.tv_autor);
-            //tvPublicacao = itemView.findViewById(R.id.tv_publicacao);
-            //tvQuantidade = itemView.findViewById(R.id.tv_quantidade);
 
             ivCapa = itemView.findViewById(R.id.livro_lista_item_iv_capa);
             tvId = itemView.findViewById(R.id.livro_lista_item_tv_id);

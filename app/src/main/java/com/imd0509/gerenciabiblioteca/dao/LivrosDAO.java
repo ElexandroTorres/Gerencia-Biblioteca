@@ -30,12 +30,7 @@ public class LivrosDAO {
         content.put(DBHelper.LIVROS_AUTORES, livro.getAutores());
         content.put(DBHelper.LIVROS_PUBLICADORA_ANO, livro.getPublicadoraAno());
         content.put(DBHelper.LIVROS_URL_IMAGEM, livro.getUrlImagemCapa());
-
-        Log.d("banco", livro.getTitulo());
-        Log.d("banco", livro.getDescricao());
-        Log.d("banco", livro.getAutores());
-        Log.d("banco", livro.getPublicadoraAno());
-        Log.d("banco", livro.getUrlImagemCapa());
+        content.put(DBHelper.LIVROS_DISPONIBILIDADE, livro.getDisponibilidade());
 
         long id;
 
@@ -46,6 +41,21 @@ public class LivrosDAO {
             return -1;
         }
         return id;
+    }
+
+    public Livro getLivro(int id) {
+        Livro livro = new Livro();
+        String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + " WHERE " + DBHelper.LIVROS_ID + "='" + id + "'";
+        Cursor cursor = read.rawQuery(sql, null);
+
+        cursor.moveToFirst();
+
+        if(cursor.getCount() == 1) {
+            return livro;
+        }
+
+        return null;
+
     }
 
     public List<Livro> listLivros() {
@@ -65,6 +75,7 @@ public class LivrosDAO {
             String autores = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_AUTORES));
             String publicadoraAno = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_PUBLICADORA_ANO));
             String urlImagem = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_URL_IMAGEM));
+            String disponibilidade = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DISPONIBILIDADE));
 
             livro.setId(id);
             livro.setTitulo(titulo);
@@ -89,6 +100,7 @@ public class LivrosDAO {
         content.put(DBHelper.LIVROS_AUTORES, livro.getAutores());
         content.put(DBHelper.LIVROS_PUBLICADORA_ANO, livro.getPublicadoraAno());
         content.put(DBHelper.LIVROS_URL_IMAGEM, livro.getUrlImagemCapa());
+        content.put(DBHelper.LIVROS_DISPONIBILIDADE, livro.getDisponibilidade());
 
         try {
             String[] args = {Integer.toString(livro.getId())};

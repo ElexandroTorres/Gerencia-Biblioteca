@@ -18,6 +18,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static String LIVROS_AUTORES = "autores";
     public static String LIVROS_PUBLICADORA_ANO = "publicadoraAno";
     public static String LIVROS_URL_IMAGEM = "urlImage";
+    public static String LIVROS_DISPONIBILIDADE = "disponibilidade";
 
     public static String USUARIOS_NOME_TABELA = "usuarios";
     public static String USUARIOS_CPF = "cpf";
@@ -50,6 +51,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 LIVROS_DESCRICAO + " VARCHAR(500) NOT NULL, " +
                 LIVROS_AUTORES + " VARCHAR(20) NOT NULL, " +
                 LIVROS_PUBLICADORA_ANO + " VARCHAR(30) NOT NULL, " +
+                LIVROS_DISPONIBILIDADE + " VARCHAR(12) NOT NULL, " +
                 LIVROS_URL_IMAGEM + " TEXT NOT NULL);";
 
         String sqlCreateUsuarios = "CREATE TABLE IF NOT EXISTS " + USUARIOS_NOME_TABELA +
