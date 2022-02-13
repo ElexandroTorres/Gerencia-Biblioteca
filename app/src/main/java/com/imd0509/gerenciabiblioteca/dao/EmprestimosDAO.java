@@ -13,12 +13,12 @@ import com.imd0509.gerenciabiblioteca.model.Usuario;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EmprestimoDAO {
+public class EmprestimosDAO {
 
     private final SQLiteDatabase escreve;
     private final SQLiteDatabase le;
 
-    public EmprestimoDAO(Context context){
+    public EmprestimosDAO(Context context){
         DBHelper dbHelper = new DBHelper(context);
         escreve = dbHelper.getWritableDatabase();
         le = dbHelper.getReadableDatabase();
@@ -29,9 +29,10 @@ public class EmprestimoDAO {
         //1. definir o conteudo a ser salvo
         ContentValues cv = new ContentValues();
         cv.put("nome",emprestimo.getNome());
-        cv.put("usuario", emprestimo.getUsuario());
-        cv.put("livro", emprestimo.getLivro());
+        cv.put("usuario_id", emprestimo.getUsuarioId());
+        cv.put("livro_id", emprestimo.getLivroId());
         cv.put("data", emprestimo.getDataEmprestimo());
+        cv.put("devolucao", emprestimo.getDataDevolucao());
 
 
         try{
@@ -63,15 +64,17 @@ public class EmprestimoDAO {
             //Long id = c.getLong( 0 );
             Long id = c.getLong( c.getColumnIndexOrThrow("id") );
             String nome = c.getString(c.getColumnIndexOrThrow("nome"));
-            String usuario = c.getString(c.getColumnIndexOrThrow("usuario"));
-            String livro = c.getString(c.getColumnIndexOrThrow("livro"));
+            String usuarioId = c.getString(c.getColumnIndexOrThrow("usuario_id"));
+            int livroId = c.getInt(c.getColumnIndexOrThrow("livro_id"));
             String data = c.getString(c.getColumnIndexOrThrow("data"));
+            String devolucao = c.getString(c.getColumnIndexOrThrow("devolucao"));
 
             emprestimo.setId(id);
             emprestimo.setNome(nome);
-            emprestimo.setUsuario(usuario);
-            emprestimo.setLivro(livro);
+            emprestimo.setUsuarioId(usuarioId);
+            emprestimo.setLivroId(livroId);
             emprestimo.setDataEmprestimo(data);
+            emprestimo.setDataDevolucao(devolucao);
 
             emprestimos.add(emprestimo);
         }
@@ -85,9 +88,10 @@ public class EmprestimoDAO {
         //1. definir conteudo a ser salvo
         ContentValues cv = new ContentValues();
         cv.put("nome",emprestimo.getNome());
-        cv.put("usuario",emprestimo.getUsuario());
-        cv.put("livro", emprestimo.getLivro());
+        cv.put("usuario_id",emprestimo.getUsuarioId());
+        cv.put("livro_id", emprestimo.getLivroId());
         cv.put("data", emprestimo.getDataEmprestimo());
+        cv.put("devolucao", emprestimo.getDataDevolucao());
 
         //2. atualizar valor no banco
         try{

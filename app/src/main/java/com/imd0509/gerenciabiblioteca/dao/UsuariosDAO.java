@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
+import com.imd0509.gerenciabiblioteca.model.Livro;
 import com.imd0509.gerenciabiblioteca.model.Usuario;
 
 import java.text.ParseException;
@@ -41,6 +42,21 @@ public class UsuariosDAO {
             return false;
         }
         return true;
+    }
+
+    public Usuario getUsuario(String cpf) {
+        Usuario usuario = new Usuario();
+        String sql = "SELECT * FROM " + DBHelper.USUARIOS_NOME_TABELA + " WHERE " + DBHelper.USUARIOS_CPF + "='" + cpf + "'";
+        Cursor cursor = ler.rawQuery(sql, null);
+
+        cursor.moveToFirst();
+
+        if(cursor.getCount() == 1) {
+            return usuario;
+        }
+
+        return null;
+
     }
 
     public List<Usuario> listar() throws ParseException {

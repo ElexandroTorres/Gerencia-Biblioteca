@@ -37,10 +37,10 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
 
         Emprestimo emprestimo = meusEmprestimos.get(position);
         holder.tvNome.setText(emprestimo.getNome());
-        holder.tvUsuario.setText(emprestimo.getUsuario());
-        holder.tvLivro.setText(emprestimo.getLivro());
+        holder.tvUsuario.setText(emprestimo.getUsuarioId());
+        holder.tvLivro.setText(emprestimo.getBookId());
         holder.tvData.setText(emprestimo.getDataEmprestimo());
-
+        holder.tvDataDevolucao.setText(emprestimo.getDataDevolucao());
 
     }
 
@@ -58,6 +58,7 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
         TextView tvUsuario;
         TextView tvLivro;
         TextView tvData;
+        TextView tvDataDevolucao;
 
         public MinhaViewHolder(View itemList) {
             super(itemList);
@@ -67,6 +68,7 @@ public class EmprestimosAdapter extends RecyclerView.Adapter<EmprestimosAdapter.
             tvUsuario = itemList.findViewById(R.id.tvUsuario);
             tvLivro = itemList.findViewById(R.id.tvLivro);
             tvData = itemList.findViewById(R.id.tvData);
+            tvDataDevolucao = itemList.findViewById(R.id.tvDataDevolucao);
 
             cvEmprestimo.setOnClickListener(this);
             cvEmprestimo.setOnLongClickListener(this);
