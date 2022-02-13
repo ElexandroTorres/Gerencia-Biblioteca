@@ -12,9 +12,11 @@ public class Livro implements Parcelable {
     private String autores;
     private String urlImagemCapa;
     private String publicadoraAno;
-    private boolean estaDisponivel = true;
+    private boolean estaDisponivel;
 
-    public Livro(){}
+    public Livro(){
+        this.estaDisponivel = true;
+    }
 
     public Livro(int id, String titulo, String descricao, String autores, String urlImagemCapa, String publicadoraAno) {
         this.id = id;
@@ -23,6 +25,7 @@ public class Livro implements Parcelable {
         this.autores = autores;
         this.urlImagemCapa = urlImagemCapa;
         this.publicadoraAno = publicadoraAno;
+        this.estaDisponivel = true;
     }
 
     /* ID */
