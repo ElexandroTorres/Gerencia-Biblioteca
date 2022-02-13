@@ -1,7 +1,6 @@
 package com.imd0509.gerenciabiblioteca.adapters;
 
 import android.graphics.Color;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.imd0509.gerenciabiblioteca.R;
 import com.imd0509.gerenciabiblioteca.model.Livro;
-import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -43,7 +41,7 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
     public void onBindViewHolder(@NonNull LivrosAdapter.LivrosViewHolder holder, int position) {
         Livro livro = listaLivros.get(position);
         holder.tvId.setText("" + livro.getId());
-        if(livro.getDisponibilidade()) {
+        if(livro.getDisponibilidade().equals("Disponivel")) {
             holder.tvDisponibilidade.setText("Disponivel");
             holder.tvDisponibilidade.setTextColor(Color.parseColor("#bdbdbd"));
         }
@@ -67,10 +65,6 @@ public class LivrosAdapter extends RecyclerView.Adapter<LivrosAdapter.LivrosView
     }
 
     public class LivrosViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener{
-        //TextView tvTitulo;
-        //TextView tvAutor;
-        //TextView tvPublicacao;
-        //TextView tvQuantidade;
         ImageView ivCapa;
         TextView tvId;
         TextView tvDisponibilidade;

@@ -39,16 +39,20 @@
             android:exported="false" />
         <activity
             android:name=".ui.livros.AdicionarLivroActivity"
+            android:theme="@style/Theme.GerenciaBiblioteca.NoBar"
             android:exported="false" />
         <activity
             android:name=".ui.livros.DetalhesLivroActivity"
+            android:theme="@style/Theme.GerenciaBiblioteca.NoBar"
             android:exported="false" />
         <activity
             android:name=".ui.livros.GerenciarLivrosActivity"
+            android:theme="@style/Theme.GerenciaBiblioteca.NoBar"
             android:exported="false" />
         <activity
             android:name=".ui.MainActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.GerenciaBiblioteca.NoBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

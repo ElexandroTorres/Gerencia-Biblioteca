@@ -3,6 +3,7 @@ package com.imd0509.gerenciabiblioteca.ui.livros;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -22,6 +23,7 @@ public class DetalhesLivroActivity extends AppCompatActivity {
     TextView editoraAno;
     TextView descricaoLivro;
     TextView identificadorLivro;
+    TextView situacaoLivro;
 
     Livro livro;
 
@@ -45,14 +47,13 @@ public class DetalhesLivroActivity extends AppCompatActivity {
         editoraAno = findViewById(R.id.detalhes_livro_tv_editora_ano);
         descricaoLivro = findViewById(R.id.detalhes_livro_tv_descricao_livro);
         identificadorLivro = findViewById(R.id.detalhes_livro_tv_identificador_livro);
+        situacaoLivro = findViewById(R.id.detalhes_livro_tv_situacao);
     }
 
 
     private void setValuesOnViews() {
 
-        Log.d("livro", livro.getUrlImagemCapa());
-
-        if(!livro.getUrlImagemCapa().isEmpty()) {
+        if (!livro.getUrlImagemCapa().isEmpty()) {
             Glide.with(DetalhesLivroActivity.this)
                     .load(livro.getUrlImagemCapa())
                     .placeholder(R.drawable.capa_livro_shape)
@@ -61,11 +62,19 @@ public class DetalhesLivroActivity extends AppCompatActivity {
         }
 
 
-
         tituloLivro.setText(livro.getTitulo());
         autorLivro.setText(livro.getAutores());
         editoraAno.setText(livro.getPublicadoraAno());
         descricaoLivro.setText(livro.getDescricao());
         identificadorLivro.setText("" + livro.getId());
+
+
+        if (livro.getDisponibilidade().equals("Disponivel")) {
+            situacaoLivro.setText("Disponivel");
+            situacaoLivro.setTextColor(Color.parseColor("#00FF00"));
+        } else {
+            situacaoLivro.setText("Emprestado");
+            situacaoLivro.setTextColor(Color.parseColor("#FF0000"));
+        }
     }
 }

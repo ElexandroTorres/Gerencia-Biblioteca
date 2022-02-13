@@ -26,6 +26,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
+            android:maxLength="36"
             android:text="Harry Potter e as Reliquias da morte"
             android:textColor="@color/black"
             android:textSize="24sp"
@@ -38,20 +39,21 @@
             android:id="@+id/detalhes_livro_tv_autor_livro"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="J.K Rolling"
+            android:maxLength="30"
             app:layout_constraintStart_toStartOf="@id/detalhes_livro_tv_titulo_livro"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_titulo_livro" />
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_titulo_livro"
+            tools:text="J.K Rolling" />
 
         <TextView
             android:id="@+id/detalhes_livro_tv_editora_ano"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            tools:text="Editora - ano"
             android:layout_marginRight="8dp"
+            android:maxLength="30"
             app:layout_constraintBottom_toBottomOf="@id/detalhes_livro_iv_capa_livro"
-            app:layout_constraintStart_toStartOf="@id/detalhes_livro_tv_autor_livro"
             app:layout_constraintEnd_toEndOf="parent"
-             />
+            app:layout_constraintStart_toStartOf="@id/detalhes_livro_tv_autor_livro"
+            tools:text="Editora - ano" />
 
         <TextView
             android:id="@+id/detalhes_livro_tv_descricao_livro"
@@ -82,26 +84,24 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="23444123131231"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro_label" />
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro_label"
+            tools:text="23444123131231" />
 
         <TextView
             android:id="@+id/detalhes_livro_tv_situacao"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="16dp"
-            android:text="Situação livro"
             android:textSize="24sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro" />
-
-
+            app:layout_constraintTop_toBottomOf="@id/detalhes_livro_tv_identificador_livro"
+            tools:text="Situação livro" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

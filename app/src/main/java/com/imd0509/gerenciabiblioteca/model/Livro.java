@@ -2,7 +2,6 @@ package com.imd0509.gerenciabiblioteca.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
 import java.util.List;
 
 public class Livro implements Parcelable {
@@ -12,10 +11,10 @@ public class Livro implements Parcelable {
     private String autores;
     private String urlImagemCapa;
     private String publicadoraAno;
-    private boolean estaDisponivel;
+    private int estaDisponivel = 1;
 
-    public Livro(){
-        this.estaDisponivel = true;
+    public Livro() {
+
     }
 
     public Livro(int id, String titulo, String descricao, String autores, String urlImagemCapa, String publicadoraAno) {
@@ -25,7 +24,6 @@ public class Livro implements Parcelable {
         this.autores = autores;
         this.urlImagemCapa = urlImagemCapa;
         this.publicadoraAno = publicadoraAno;
-        this.estaDisponivel = true;
     }
 
     /* ID */
@@ -36,6 +34,7 @@ public class Livro implements Parcelable {
     public void setId(int id) {
         this.id = id;
     }
+
     /* TITULO */
     public String getTitulo() {
         return titulo;
@@ -44,6 +43,7 @@ public class Livro implements Parcelable {
     public void setTitulo(String titulo) {
         this.titulo = titulo != null ? titulo : "";
     }
+
     /* PUBLICADORA ANO */
     public String getPublicadoraAno() {
         return publicadoraAno;
@@ -54,18 +54,17 @@ public class Livro implements Parcelable {
     }
 
     public void setPublicadoraAno(String publicadora, String ano) {
-        if(publicadora != null) {
-            if(ano != null) {
+        if (publicadora != null) {
+            if (ano != null) {
                 this.publicadoraAno = publicadora + ", " + ano;
-            }
-            else {
+            } else {
                 this.publicadoraAno = publicadora;
             }
-        }
-        else {
+        } else {
             this.publicadoraAno = "Sem informações da publicação!";
         }
     }
+
     /* DESCRIÇÃO */
     public String getDescricao() {
         return descricao;
@@ -74,21 +73,21 @@ public class Livro implements Parcelable {
     public void setDescricao(String descricao) {
         this.descricao = descricao != null ? descricao : "";
     }
+
     /* AUTORES */
     public String getAutores() {
         return autores;
     }
 
     public void setAutores(List<String> autores) {
-        if(autores != null) {
+        if (autores != null) {
             StringBuilder autoresString = new StringBuilder();
-            for(int i = 0; i < autores.size(); i++) {
+            for (int i = 0; i < autores.size(); i++) {
                 autoresString.append(", ").append(autores.get(i));
             }
 
             this.autores = autoresString.toString();
-        }
-        else {
+        } else {
             this.autores = "";
         }
 
@@ -97,30 +96,42 @@ public class Livro implements Parcelable {
     public void setAutores(String autores) {
         this.autores = autores;
     }
+
     /* IMAGEM CAPA */
     public String getUrlImagemCapa() {
         return urlImagemCapa;
     }
 
     public void setUrlImagemCapa(String urlImagemCapa) {
-        if(urlImagemCapa != null) {
+        if (urlImagemCapa != null) {
             this.urlImagemCapa = urlImagemCapa;
-        }
-        else {
+        } else {
             this.urlImagemCapa = "";
         }
     }
 
     public void emprestarLivro() {
-        this.estaDisponivel = false;
+        this.estaDisponivel = 0;
     }
 
     public void devolverLivro() {
-        this.estaDisponivel = true;
+        this.estaDisponivel = 1;
     }
 
-    public boolean getDisponibilidade() {
-        return this.estaDisponivel;
+    public String getDisponibilidade() {
+        if (this.estaDisponivel == 1) {
+            return "Disponivel";
+        } else {
+            return "Emprestado";
+        }
+    }
+
+    public void setDisponibildiade(String disponibilidade) {
+        if (disponibilidade.equals("Disponivel")) {
+            this.estaDisponivel = 1;
+        } else if (disponibilidade.equals("Emprestado")) {
+            this.estaDisponivel = 0;
+        }
     }
 
     @Override
@@ -135,6 +146,7 @@ public class Livro implements Parcelable {
         autores = in.readString();
         publicadoraAno = in.readString();
         urlImagemCapa = in.readString();
+        estaDisponivel = in.readInt();
     }
 
     public static final Creator<Livro> CREATOR = new Creator<Livro>() {
@@ -157,5 +169,8 @@ public class Livro implements Parcelable {
         dest.writeString(autores);
         dest.writeString(publicadoraAno);
         dest.writeString(urlImagemCapa);
+        dest.writeInt(estaDisponivel);
     }
+
+
 }

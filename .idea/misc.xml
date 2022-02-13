@@ -3,6 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/Elexandro/AndroidStudioProjects/Gerencia-Biblioteca/app/src/main/res/layout/activity_detalhes_livro.xml" value="0.17916666666666667" />
+        <entry key="..\:/Users/Elexandro/AndroidStudioProjects/Gerencia-Biblioteca/app/src/main/res/layout/activity_main.xml" value="0.25" />
         <entry key="..\:/Users/Elexandro/AndroidStudioProjects/GerenciaBiblioteca/app/src/main/res/drawable/capa_livro_shape.xml" value="0.129" />
         <entry key="..\:/Users/Elexandro/AndroidStudioProjects/GerenciaBiblioteca/app/src/main/res/layout/activity_adicionar_livro.xml" value="0.33" />
         <entry key="..\:/Users/Elexandro/AndroidStudioProjects/GerenciaBiblioteca/app/src/main/res/layout/activity_adicionar_usuario.xml" value="0.17916666666666667" />
