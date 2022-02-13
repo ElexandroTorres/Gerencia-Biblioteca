@@ -6,46 +6,64 @@
     android:layout_height="match_parent"
     tools:context=".ui.MainActivity">
 
-    <Button
-        android:text="Livros"
-        android:textSize="32sp"
-        android:layout_margin="16dp"
-        android:id="@+id/btn_gerenciar_livros"
+    <TextView
+        android:id="@+id/activity_main_tv_titulo"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:backgroundTint="@color/black"
+        android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_gerenciar_emprestimos"
-        />
+        android:text="Biblioteca"
+        android:textStyle="italic|bold"
+        android:textColor="@color/secondaryLightColor"
+        android:layout_margin="8dp"
+        android:textSize="64dp"/>
 
-    <Button
-        android:text="EMPRESTIMOS"
-        android:textSize="32sp"
-        android:layout_margin="16dp"
-        android:id="@+id/btn_gerenciar_emprestimos"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:backgroundTint="@color/purple_200"
-        app:layout_constraintTop_toBottomOf="@id/btn_gerenciar_livros"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/btn_gerenciar_usuarios"
-        />
-
-    <Button
-        android:text="USUARIOS"
-        android:textSize="32sp"
-        android:layout_margin="16dp"
-        android:id="@+id/btn_gerenciar_usuarios"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:backgroundTint="@color/teal_700"
-        app:layout_constraintTop_toBottomOf="@id/btn_gerenciar_emprestimos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/activity_main_tv_titulo">
+
+        <Button
+            android:id="@+id/btn_gerenciar_livros"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:text="Livros"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/btn_gerenciar_emprestimos"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_gerenciar_emprestimos"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:text="EMPRESTIMOS"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/btn_gerenciar_usuarios"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_gerenciar_livros" />
+
+        <Button
+            android:id="@+id/btn_gerenciar_usuarios"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_margin="16dp"
+            android:text="USUARIOS"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_gerenciar_emprestimos" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

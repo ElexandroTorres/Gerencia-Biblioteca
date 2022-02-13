@@ -57,9 +57,6 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
 
         livrosData = LivrosData.getLivrosData();
 
-
-
-
     }
 
     private void findViewsIds() {
@@ -89,7 +86,7 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
 
                     @Override
                     public void onFailure(Call<Root> call, Throwable t) {
-                        Log.d("meuerro", t.toString());
+                        Toast.makeText(AdicionarLivroActivity.this, "Erro ao tentar pesquisar livro", Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -119,12 +116,12 @@ public class AdicionarLivroActivity extends AppCompatActivity implements Resulta
         livroAdicionar.setPublicadoraAno(livroSelecionado.publisher, livroSelecionado.publishedDate);
         if(livroSelecionado.imageLinks != null) {
             livroAdicionar.setUrlImagemCapa(livroSelecionado.imageLinks.thumbnail);
-            Log.d("salvou", "salvou com imagem");
         }
         else {
             livroAdicionar.setUrlImagemCapa("");
-            Log.d("salvou", "salvou SEMm imagem");
         }
+
+        livroAdicionar.setDisponibildiade("Disponivel");
 
         livrosData.adicionarLivro(livroAdicionar, getApplicationContext());
     }

@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
-import android.widget.Toast;
-
 import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
 import com.imd0509.gerenciabiblioteca.model.Livro;
 
@@ -50,7 +47,7 @@ public class LivrosDAO {
 
         cursor.moveToFirst();
 
-        if(cursor.getCount() == 1) {
+        if (cursor.getCount() == 1) {
             return livro;
         }
 
@@ -63,11 +60,9 @@ public class LivrosDAO {
         String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
         Cursor cursor = read.rawQuery(sql, null);
 
-        Log.d("cursor", "" + cursor.getCount());
 
         cursor.moveToFirst();
-        while(cursor.moveToNext()) {
-            Log.d("teste", "entrou no while");
+        while (cursor.moveToNext()) {
             Livro livro = new Livro();
             int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_ID));
             String titulo = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
@@ -83,12 +78,12 @@ public class LivrosDAO {
             livro.setAutores(autores);
             livro.setPublicadoraAno(publicadoraAno);
             livro.setUrlImagemCapa(urlImagem);
+            livro.setDisponibildiade(disponibilidade);
 
             livros.add(livro);
         }
         cursor.close();
 
-        Log.d("teste", "saiu do while");
 
         return livros;
     }
@@ -104,7 +99,7 @@ public class LivrosDAO {
 
         try {
             String[] args = {Integer.toString(livro.getId())};
-            write.update(DBHelper.LIVROS_NOME_TABELA, content, "id=?",args);
+            write.update(DBHelper.LIVROS_NOME_TABELA, content, "id=?", args);
         } catch (Exception e) {
             return false;
         }

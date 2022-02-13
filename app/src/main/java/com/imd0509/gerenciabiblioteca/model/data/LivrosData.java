@@ -43,7 +43,7 @@ public final class LivrosData {
             instance.livrosAdapter.notifyDataSetChanged();
         }
         else {
-            Toast.makeText(context, "Erro ao adicionar com sucesso...", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Erro ao adicionar livro...", Toast.LENGTH_SHORT).show();
         }
     }
 
