@@ -32,6 +32,7 @@ public class EmprestimosDAO {
         cv.put("usuario_id", emprestimo.getUsuarioId());
         cv.put("livro_id", emprestimo.getLivroId());
         cv.put("data", emprestimo.getDataEmprestimo());
+        cv.put("devolucao", emprestimo.getDataDevolucao());
 
 
         try{
@@ -63,15 +64,17 @@ public class EmprestimosDAO {
             //Long id = c.getLong( 0 );
             Long id = c.getLong( c.getColumnIndexOrThrow("id") );
             String nome = c.getString(c.getColumnIndexOrThrow("nome"));
-            int usuarioId = c.getInt(c.getColumnIndexOrThrow("usuario_id"));
+            String usuarioId = c.getString(c.getColumnIndexOrThrow("usuario_id"));
             int livroId = c.getInt(c.getColumnIndexOrThrow("livro_id"));
             String data = c.getString(c.getColumnIndexOrThrow("data"));
+            String devolucao = c.getString(c.getColumnIndexOrThrow("devolucao"));
 
             emprestimo.setId(id);
             emprestimo.setNome(nome);
             emprestimo.setUsuarioId(usuarioId);
             emprestimo.setLivroId(livroId);
             emprestimo.setDataEmprestimo(data);
+            emprestimo.setDataDevolucao(devolucao);
 
             emprestimos.add(emprestimo);
         }
@@ -88,6 +91,7 @@ public class EmprestimosDAO {
         cv.put("usuario_id",emprestimo.getUsuarioId());
         cv.put("livro_id", emprestimo.getLivroId());
         cv.put("data", emprestimo.getDataEmprestimo());
+        cv.put("devolucao", emprestimo.getDataDevolucao());
 
         //2. atualizar valor no banco
         try{

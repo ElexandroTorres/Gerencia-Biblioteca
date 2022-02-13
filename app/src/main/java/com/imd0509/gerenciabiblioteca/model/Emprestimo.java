@@ -7,7 +7,8 @@ public class Emprestimo implements Serializable {
     private Long id;
     private String nome;
     private String dataEmprestimo;
-    private int usuarioId;
+    private String dataDevolucao;
+    private String usuarioId;
     private int livroId;
 
     public Long getId() {
@@ -34,12 +35,12 @@ public class Emprestimo implements Serializable {
         this.dataEmprestimo = dataEmprestimo;
     }
 
-    public int getUsuarioId() {
-        return usuarioId;
+    public String getDataDevolucao() {
+        return dataDevolucao;
     }
 
-    public void setUsuarioId(int usuarioId) {
-        this.usuarioId = usuarioId;
+    public void setDataDevolucao(String dataDevolucao) {
+        this.dataDevolucao = dataDevolucao;
     }
 
     public int getLivroId() {
@@ -50,14 +51,15 @@ public class Emprestimo implements Serializable {
         this.livroId = livroId;
     }
 
-    public String getUserId() {
-        int user = getUsuarioId();
-        String usuario_id = Integer.toString(user);
-        return usuario_id;
-
+    public String getUsuarioId() {
+        return usuarioId;
     }
 
-    public String getBokkId() {
+    public void setUsuarioId(String usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public String getBookId() {
         int book = getLivroId();
         String livro_id = Integer.toString(book);
         return livro_id;
