@@ -4,8 +4,10 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.imd0509.gerenciabiblioteca.helpers.DBHelper;
 import com.imd0509.gerenciabiblioteca.model.Livro;
+import com.imd0509.gerenciabiblioteca.model.Usuario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,30 +43,11 @@ public class LivrosDAO {
     }
 
     public Livro getLivro(int id) {
-        Livro livro = new Livro();
         String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + " WHERE " + DBHelper.LIVROS_ID + "='" + id + "'";
         Cursor cursor = read.rawQuery(sql, null);
 
-        cursor.moveToFirst();
-
-        if (cursor.getCount() == 1) {
-            return livro;
-        }
-
-        return null;
-
-    }
-
-    public List<Livro> listLivros() {
-        List<Livro> livros = new ArrayList<>();
-        String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
-        Cursor cursor = read.rawQuery(sql, null);
-
-
-        cursor.moveToFirst();
-        while (cursor.moveToNext()) {
+        if (cursor.moveToFirst()) {
             Livro livro = new Livro();
-            int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_ID));
             String titulo = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
             String descricao = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DESCRICAO));
             String autores = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_AUTORES));
@@ -80,7 +63,41 @@ public class LivrosDAO {
             livro.setUrlImagemCapa(urlImagem);
             livro.setDisponibildiade(disponibilidade);
 
-            livros.add(livro);
+            cursor.close();
+            return livro;
+        }
+
+        cursor.close();
+        return null;
+
+    }
+
+    public List<Livro> listLivros() {
+        List<Livro> livros = new ArrayList<>();
+        String sql = "SELECT * FROM " + DBHelper.LIVROS_NOME_TABELA + ";";
+        Cursor cursor = read.rawQuery(sql, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Livro livro = new Livro();
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_ID));
+                String titulo = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_TITULO));
+                String descricao = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DESCRICAO));
+                String autores = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_AUTORES));
+                String publicadoraAno = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_PUBLICADORA_ANO));
+                String urlImagem = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_URL_IMAGEM));
+                String disponibilidade = cursor.getString(cursor.getColumnIndexOrThrow(DBHelper.LIVROS_DISPONIBILIDADE));
+
+                livro.setId(id);
+                livro.setTitulo(titulo);
+                livro.setDescricao(descricao);
+                livro.setAutores(autores);
+                livro.setPublicadoraAno(publicadoraAno);
+                livro.setUrlImagemCapa(urlImagem);
+                livro.setDisponibildiade(disponibilidade);
+
+                livros.add(livro);
+            } while (cursor.moveToNext());
         }
         cursor.close();
 
