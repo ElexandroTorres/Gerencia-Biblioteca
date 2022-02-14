@@ -30,8 +30,13 @@ public class DetalhesUsuarioActivity extends AppCompatActivity {
     private Button btnAtualizar;
 
     public void onClickAtualizar(View view) {
-        String nome = etNome.getText().toString();
-        usuario.setNome(nome);
+        usuario.setNome(etNome.getText().toString());
+        usuario.setEmail(etEmail.getText().toString());
+        usuario.setCep(etCep.getText().toString());
+        usuario.setBairro(etBairro.getText().toString());
+        usuario.setRua(etRua.getText().toString());
+        usuario.setNumero(etNumero.getText().toString());
+        usuario.setComplemento(etComplemento.getText().toString());
 
         UsuariosDAO usuariosDAO = new UsuariosDAO(DetalhesUsuarioActivity.this);
         if (usuariosDAO.atualizar(usuario)) {
