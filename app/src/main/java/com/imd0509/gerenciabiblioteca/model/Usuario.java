@@ -13,14 +13,14 @@ public class Usuario implements Serializable {
     private String rua;
     private String numero;
     private String complemento;
-    private List<Emprestimo> emprestimos;
+    private Integer emprestimos;
 
     public Usuario() {
-        emprestimos = new ArrayList<>();
+        emprestimos = 0;
     }
 
 
-    public Usuario(String cpf, String nome, String email, String cep, String bairro, String rua, String numero, List<Emprestimo> emprestimos) {
+    public Usuario(String cpf, String nome, String email, String cep, String bairro, String rua, String numero, Integer emprestimos) {
         this.cpf = cpf;
         this.nome = nome;
         this.email = email;
@@ -31,7 +31,7 @@ public class Usuario implements Serializable {
         this.emprestimos = emprestimos;
     }
 
-    public Usuario(String cpf, String nome, String email, String cep, String bairro, String rua, String numero, String complemento, List<Emprestimo> emprestimos) {
+    public Usuario(String cpf, String nome, String email, String cep, String bairro, String rua, String numero, String complemento, Integer emprestimos) {
         this(cpf, nome, email, cep, bairro, rua, numero, emprestimos);
         this.complemento = complemento;
     }
@@ -100,11 +100,11 @@ public class Usuario implements Serializable {
         this.complemento = complemento;
     }
 
-    public List<Emprestimo> getEmprestimos() {
+    public Integer getEmprestimos() {
         return emprestimos;
     }
 
-    public void setEmprestimos(List<Emprestimo> emprestimos) {
+    public void setEmprestimos(Integer emprestimos) {
         this.emprestimos = emprestimos;
     }
 

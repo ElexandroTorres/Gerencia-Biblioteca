@@ -36,7 +36,7 @@ public class AdicionarUsuarioActivity extends AppCompatActivity {
                 etRua.getText().toString(),
                 etNumero.getText().toString(),
                 etComplemento.getText().toString(),
-                new ArrayList<>());
+                0);
 
         UsuariosDAO usuariosDAO = new UsuariosDAO(AdicionarUsuarioActivity.this);
         if (usuariosDAO.salvar(usuario)) {
