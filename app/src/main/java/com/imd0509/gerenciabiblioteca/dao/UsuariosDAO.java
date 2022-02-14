@@ -45,16 +45,25 @@ public class UsuariosDAO {
     }
 
     public Usuario getUsuario(String cpf) {
-        Usuario usuario = new Usuario();
         String sql = "SELECT * FROM " + DBHelper.USUARIOS_NOME_TABELA + " WHERE " + DBHelper.USUARIOS_CPF + "='" + cpf + "'";
         Cursor cursor = ler.rawQuery(sql, null);
 
-        cursor.moveToFirst();
+        if (cursor.moveToFirst()) {
+            String nome = cursor.getString(cursor.getColumnIndexOrThrow("nome"));
+            String email = cursor.getString(cursor.getColumnIndexOrThrow("email"));
+            String cep = cursor.getString(cursor.getColumnIndexOrThrow("cep"));
+            String bairro = cursor.getString(cursor.getColumnIndexOrThrow("bairro"));
+            String rua = cursor.getString(cursor.getColumnIndexOrThrow("rua"));
+            String numero = cursor.getString(cursor.getColumnIndexOrThrow("numero"));
+            String complemento = cursor.getString(cursor.getColumnIndexOrThrow("complemento"));
 
-        if (cursor.getCount() == 1) {
+            Usuario usuario = new Usuario(cpf, nome, email, cep, bairro, rua, numero, complemento, 0);
+
+            cursor.close();
             return usuario;
         }
 
+        cursor.close();
         return null;
 
     }
@@ -63,12 +72,14 @@ public class UsuariosDAO {
         List<Usuario> usuarios = new ArrayList<>();
 
         String sql = String.format("SELECT %s, %s.%s as %s, %s, %s, %s, %s, %s, %s, count(%s.%s) as %s " +
-                        "FROM %s JOIN %s ON %s=%s GROUP BY %s;",
-                DBHelper.USUARIOS_CPF,DBHelper.USUARIOS_NOME_TABELA, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_EMAIL, DBHelper.USUARIOS_CEP,
+                        "FROM %s LEFT JOIN %s ON %s=%s GROUP BY %s;",
+                DBHelper.USUARIOS_CPF, DBHelper.USUARIOS_NOME_TABELA, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_EMAIL, DBHelper.USUARIOS_CEP,
                 DBHelper.USUARIOS_BAIRRO, DBHelper.USUARIOS_RUA, DBHelper.USUARIOS_NUMERO, DBHelper.USUARIOS_COMPLEMENTO,
                 DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.EMPRESTIMOS_ID, DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.USUARIOS_NOME_TABELA,
                 DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.USUARIOS_CPF, DBHelper.USUARIO_EMPRESTIMO, DBHelper.USUARIOS_CPF
         );
+
+        System.out.println(sql);
 
         Cursor cursor = ler.rawQuery(sql, null);
 
