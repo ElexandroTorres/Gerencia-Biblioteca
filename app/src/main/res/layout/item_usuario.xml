@@ -39,17 +39,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_nome_usuario" />
 
-        <TextView
-            android:id="@+id/tv_emprestimos_atual"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:text="Emprestados atualmente: 2"
-            android:textSize="24sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_emprestimos_total" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 

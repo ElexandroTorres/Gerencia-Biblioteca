@@ -18,7 +18,6 @@ import java.util.ArrayList;
 
 public class DetalhesUsuarioActivity extends AppCompatActivity {
     private Usuario usuario;
-    private TextView tvQtnEmprestimosAtual;
     private TextView tvQtnEmprestimosTotal;
     private EditText etCpf;
     private EditText etNome;
@@ -51,7 +50,6 @@ public class DetalhesUsuarioActivity extends AppCompatActivity {
         setContentView(R.layout.activity_detalhes_usuario);
 
         usuario = (Usuario) getIntent().getSerializableExtra("usuario");
-        tvQtnEmprestimosAtual = findViewById(R.id.tv_qtn_emprestimos_atual);
         tvQtnEmprestimosTotal = findViewById(R.id.tv_qtn_emprestimos_total);
         etCpf = findViewById(R.id.et_cpf);
         etNome = findViewById(R.id.et_nome);
@@ -63,8 +61,7 @@ public class DetalhesUsuarioActivity extends AppCompatActivity {
         etComplemento = findViewById(R.id.et_complemento);
         btnAtualizar = findViewById(R.id.btn_atualizar_usuario);
 
-        tvQtnEmprestimosAtual.setText(String.valueOf(usuario.getEmprestimos().size()));
-        tvQtnEmprestimosTotal.setText(String.valueOf(usuario.getEmprestimos().size()));
+        tvQtnEmprestimosTotal.setText(String.valueOf(usuario.getEmprestimos()));
         etCpf.setText(usuario.getCpf());
         etNome.setText(usuario.getNome());
         etEmail.setText(usuario.getEmail());

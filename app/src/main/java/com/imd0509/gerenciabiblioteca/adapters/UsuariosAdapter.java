@@ -36,8 +36,7 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
     public void onBindViewHolder(@NonNull LCHolder holder, int position) {
         Usuario usuario = usuarios.get(position);
         holder.tvNome.setText(usuario.getNome());
-        holder.tvEmprestimosTotal.setText("Total de empréstimos: " + usuario.getEmprestimos().size());
-        holder.tvEmprestimosAtual.setText("Emprestados atualmente: " + usuario.getEmprestimos().size());
+        holder.tvEmprestimosTotal.setText("Total de empréstimos: " + usuario.getEmprestimos());
     }
 
     @Override
@@ -49,7 +48,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
         private ItemUsuarioListener itemUsuarioListener;
         public TextView tvNome;
         public TextView tvEmprestimosTotal;
-        public TextView tvEmprestimosAtual;
 
         public LCHolder(@NonNull View itemView, ItemUsuarioListener itemUsuarioListener) {
             super(itemView);
@@ -58,7 +56,6 @@ public class UsuariosAdapter extends RecyclerView.Adapter<UsuariosAdapter.LCHold
 
             tvNome = itemView.findViewById(R.id.tv_nome_usuario);
             tvEmprestimosTotal = itemView.findViewById(R.id.tv_emprestimos_total);
-            tvEmprestimosAtual = itemView.findViewById(R.id.tv_emprestimos_atual);
 
             itemView.setOnClickListener(this);
         }

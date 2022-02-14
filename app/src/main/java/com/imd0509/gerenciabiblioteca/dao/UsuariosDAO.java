@@ -51,7 +51,7 @@ public class UsuariosDAO {
 
         cursor.moveToFirst();
 
-        if(cursor.getCount() == 1) {
+        if (cursor.getCount() == 1) {
             return usuario;
         }
 
@@ -62,7 +62,13 @@ public class UsuariosDAO {
     public List<Usuario> listar() throws ParseException {
         List<Usuario> usuarios = new ArrayList<>();
 
-        String sql = "SELECT * FROM " + DBHelper.USUARIOS_NOME_TABELA + ";";
+        String sql = String.format("SELECT %s, %s.%s as %s, %s, %s, %s, %s, %s, %s, count(%s.%s) as %s " +
+                        "FROM %s JOIN %s ON %s=%s GROUP BY %s;",
+                DBHelper.USUARIOS_CPF,DBHelper.USUARIOS_NOME_TABELA, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_NOME, DBHelper.USUARIOS_EMAIL, DBHelper.USUARIOS_CEP,
+                DBHelper.USUARIOS_BAIRRO, DBHelper.USUARIOS_RUA, DBHelper.USUARIOS_NUMERO, DBHelper.USUARIOS_COMPLEMENTO,
+                DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.EMPRESTIMOS_ID, DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.USUARIOS_NOME_TABELA,
+                DBHelper.EMPRESTIMOS_NOME_TABELA, DBHelper.USUARIOS_CPF, DBHelper.USUARIO_EMPRESTIMO, DBHelper.USUARIOS_CPF
+        );
 
         Cursor cursor = ler.rawQuery(sql, null);
 
@@ -76,8 +82,9 @@ public class UsuariosDAO {
                 String rua = cursor.getString(cursor.getColumnIndexOrThrow("rua"));
                 String numero = cursor.getString(cursor.getColumnIndexOrThrow("numero"));
                 String complemento = cursor.getString(cursor.getColumnIndexOrThrow("complemento"));
+                Integer emprestimos = cursor.getInt(cursor.getColumnIndexOrThrow("emprestimos"));
 
-                Usuario usuario = new Usuario(cpf, nome, email, cep, bairro, rua, numero, complemento, new ArrayList<>());
+                Usuario usuario = new Usuario(cpf, nome, email, cep, bairro, rua, numero, complemento, emprestimos);
                 usuarios.add(usuario);
             } while (cursor.moveToNext());
         }
